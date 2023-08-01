@@ -10,33 +10,33 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.zelaux.arcplugin.commandParam.psi.CPTypes.*;
 import com.zelaux.arcplugin.commandParam.psi.*;
 
-public class PsiArcCommandParamsRequiredParamImpl extends PsiArcCommandParamsParamImpl implements PsiArcCommandParamsRequiredParam {
+public class PsiACPOptionalParamImpl extends PsiACPParamImpl implements PsiACPOptionalParam {
 
-  public PsiArcCommandParamsRequiredParamImpl(@NotNull ASTNode node) {
+  public PsiACPOptionalParamImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
-  public void accept(@NotNull PsiArcCommandParamsVisitor visitor) {
-    visitor.visitRequiredParam(this);
+  public void accept(@NotNull PsiACPVisitor visitor) {
+    visitor.visitOptionalParam(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PsiArcCommandParamsVisitor) accept((PsiArcCommandParamsVisitor)visitor);
+    if (visitor instanceof PsiACPVisitor) accept((PsiACPVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public PsiArcCommandParamsId getId() {
-    return findNotNullChildByClass(PsiArcCommandParamsId.class);
+  public PsiACPId getId() {
+    return findNotNullChildByClass(PsiACPId.class);
   }
 
   @Override
   @Nullable
-  public PsiArcCommandParamsVariadic getVariadic() {
-    return findChildByClass(PsiArcCommandParamsVariadic.class);
+  public PsiACPVariadic getVariadic() {
+    return findChildByClass(PsiACPVariadic.class);
   }
 
 }

@@ -11,19 +11,19 @@ import static com.zelaux.arcplugin.commandParam.psi.CPTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.zelaux.arcplugin.commandParam.psi.*;
 
-public class PsiArcCommandParamsVariadicImpl extends ASTWrapperPsiElement implements PsiArcCommandParamsVariadic {
+public abstract class PsiACPParamImpl extends ASTWrapperPsiElement implements PsiACPParam {
 
-  public PsiArcCommandParamsVariadicImpl(@NotNull ASTNode node) {
+  public PsiACPParamImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  public void accept(@NotNull PsiArcCommandParamsVisitor visitor) {
-    visitor.visitVariadic(this);
+  public void accept(@NotNull PsiACPVisitor visitor) {
+    visitor.visitParam(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PsiArcCommandParamsVisitor) accept((PsiArcCommandParamsVisitor)visitor);
+    if (visitor instanceof PsiACPVisitor) accept((PsiACPVisitor)visitor);
     else super.accept(visitor);
   }
 

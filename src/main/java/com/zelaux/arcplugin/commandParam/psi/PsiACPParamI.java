@@ -4,19 +4,19 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface PsiArcCommandParamsParamI extends PsiElement {
+public interface PsiACPParamI extends PsiElement {
 
     @NotNull
-    PsiArcCommandParamsId getId();
+    PsiACPId getId();
 
     @Nullable
-    PsiArcCommandParamsVariadic getVariadic();
+    PsiACPVariadic getVariadic();
 
     default boolean isVariadic() {
         return getVariadic() != null;
     }
     default boolean isOptional(){
-        return this instanceof PsiArcCommandParamsOptionalParam;
+        return this instanceof PsiACPOptionalParam;
     }
     default String getParameterName(){
         return getId().getIdentifier().getText();

@@ -25,14 +25,14 @@ public class VariadicParamPositionInspection extends LocalInspectionTool {
     @Override
     public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
 //        return super.buildVisitor(holder, isOnTheFly);
-        return new PsiArcCommandParamsVisitor(){
+        return new PsiACPVisitor(){
 
             @Override
-            public void visitParam(@NotNull PsiArcCommandParamsParam o) {
+            public void visitParam(@NotNull PsiACPParam o) {
 
                 if (o.isVariadic()) {
-                    PsiArcCommandParamsParamList list = (PsiArcCommandParamsParamList) o.getParent();
-                    List<PsiArcCommandParamsParam> paramList = list.getParamList();
+                    PsiACPParamList list = (PsiACPParamList) o.getParent();
+                    List<PsiACPParam> paramList = list.getParamList();
                     int i = paramList.indexOf(o);
                     if(i!=paramList.size()-1){
                         if (!o.isOptional() && paramList.get(paramList.size()-1).isOptional()) {
@@ -42,7 +42,7 @@ public class VariadicParamPositionInspection extends LocalInspectionTool {
                         }
                     }
                     int counter=0;
-                    for (PsiArcCommandParamsParam param : paramList) {
+                    for (PsiACPParam param : paramList) {
                         if (param.isVariadic()) counter++;
                     }
                     if(counter>1){
@@ -61,20 +61,20 @@ public class VariadicParamPositionInspection extends LocalInspectionTool {
 
         @Override
         public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
-            PsiArcCommandParamsParam psiElement = (PsiArcCommandParamsParam) descriptor.getPsiElement();
-            PsiArcCommandParamsParamList parent = (PsiArcCommandParamsParamList) psiElement.getParent();
-            List<PsiArcCommandParamsParam> list = new ArrayList<>(parent.getParamList());
+            PsiACPParam psiElement = (PsiACPParam) descriptor.getPsiElement();
+            PsiACPParamList parent = (PsiACPParamList) psiElement.getParent();
+            List<PsiACPParam> list = new ArrayList<>(parent.getParamList());
             list.sort(Structs.comps(
-                    Structs.comparing(PsiArcCommandParamsParamI::isOptional),
-                    Structs.comparing(PsiArcCommandParamsParamI::isVariadic)
+                    Structs.comparing(PsiACPParamI::isOptional),
+                    Structs.comparing(PsiACPParamI::isVariadic)
             ));
             StringJoiner joiner = new StringJoiner(" ");
-            for (PsiArcCommandParamsParam param : list) {
+            for (PsiACPParam param : list) {
                 joiner.add(param.getText());
             }
 
             WriteAction.run(()->{
-                parent.replace(PsiArcCommandParamsFactory.createList(project,joiner.toString()));
+                parent.replace(PsiACPFactory.createList(project,joiner.toString()));
             });
         }
     }

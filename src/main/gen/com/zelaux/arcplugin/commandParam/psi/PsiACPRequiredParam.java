@@ -5,6 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PsiArcCommandParamsParam extends PsiArcCommandParamsParamI {
+public interface PsiACPRequiredParam extends PsiACPParam {
+
+  @NotNull
+  PsiACPId getId();
+
+  @Nullable
+  PsiACPVariadic getVariadic();
 
 }

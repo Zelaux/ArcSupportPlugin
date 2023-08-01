@@ -1,8 +1,8 @@
 {
-  parserClass="com.zelaux.arcplugin.commandParam.parser.ArcCommandParamParser"
+  parserClass="com.zelaux.arcplugin.commandParam.parser.ArcCommandParamsParser"
   parserUtilClass="com.intellij.lang.parser.GeneratedParserUtilBase"
 
-  psiClassPrefix="PsiArcCommandParams"
+  psiClassPrefix="PsiACP"
   psiImplClassSuffix="Impl"
   psiPackage="com.zelaux.arcplugin.commandParam.psi"
   psiImplPackage="com.zelaux.arcplugin.commandParam.psi.impl"
@@ -24,7 +24,7 @@
     IDENTIFIER="regexp:(\\.*|[^\s<>\[\].]+)+"
   ]
 
-  implements("param")="com.zelaux.arcplugin.commandParam.psi.PsiArcCommandParamsParamI"
+  implements("param")="com.zelaux.arcplugin.commandParam.psi.PsiACPParamI"
   extends("optional_param|required_param")=param
 }
 it::=param_list

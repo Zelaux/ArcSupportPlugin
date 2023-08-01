@@ -11,26 +11,26 @@ import static com.zelaux.arcplugin.commandParam.psi.CPTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.zelaux.arcplugin.commandParam.psi.*;
 
-public class PsiArcCommandParamsIdImpl extends ASTWrapperPsiElement implements PsiArcCommandParamsId {
+public class PsiACPParamListImpl extends ASTWrapperPsiElement implements PsiACPParamList {
 
-  public PsiArcCommandParamsIdImpl(@NotNull ASTNode node) {
+  public PsiACPParamListImpl(@NotNull ASTNode node) {
     super(node);
   }
 
-  public void accept(@NotNull PsiArcCommandParamsVisitor visitor) {
-    visitor.visitId(this);
+  public void accept(@NotNull PsiACPVisitor visitor) {
+    visitor.visitParamList(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PsiArcCommandParamsVisitor) accept((PsiArcCommandParamsVisitor)visitor);
+    if (visitor instanceof PsiACPVisitor) accept((PsiACPVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
   @NotNull
-  public PsiElement getIdentifier() {
-    return findNotNullChildByType(CP_IDENTIFIER);
+  public List<PsiACPParam> getParamList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiACPParam.class);
   }
 
 }

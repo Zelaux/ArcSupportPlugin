@@ -29,19 +29,19 @@ public interface CPTypes {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
       if (type == CP_ID) {
-        return new PsiArcCommandParamsIdImpl(node);
+        return new PsiACPIdImpl(node);
       }
       else if (type == CP_OPTIONAL_PARAM) {
-        return new PsiArcCommandParamsOptionalParamImpl(node);
+        return new PsiACPOptionalParamImpl(node);
       }
       else if (type == CP_PARAM_LIST) {
-        return new PsiArcCommandParamsParamListImpl(node);
+        return new PsiACPParamListImpl(node);
       }
       else if (type == CP_REQUIRED_PARAM) {
-        return new PsiArcCommandParamsRequiredParamImpl(node);
+        return new PsiACPRequiredParamImpl(node);
       }
       else if (type == CP_VARIADIC) {
-        return new PsiArcCommandParamsVariadicImpl(node);
+        return new PsiACPVariadicImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

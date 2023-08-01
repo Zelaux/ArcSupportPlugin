@@ -8,13 +8,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.PsiPlainTextFileImpl;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.zelaux.arcplugin.commandParam.ArcCommandParamLanguage;
-import com.zelaux.arcplugin.commandParam.parser.ArcCommandParamParser;
+import com.zelaux.arcplugin.commandParam.parser.ArcCommandParamsParser;
 import com.zelaux.arcplugin.commandParam.parsing.ArcCommandParamsLexer;
-import com.zelaux.arcplugin.commandParam.psi.CPTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class ArcCommandParamsParserDefinition implements ParserDefinition {
@@ -35,7 +33,7 @@ public class ArcCommandParamsParserDefinition implements ParserDefinition {
 
     @Override
     public @NotNull PsiParser createParser(Project project) {
-        return new ArcCommandParamParser();
+        return new ArcCommandParamsParser();
     }
 
     @Override

@@ -32,5 +32,13 @@
                          enabledByDefault="true"
                          level="WARNING"
         />
+        <localInspection
+                implementationClass="com.zelaux.arcplugin.commandParam.inspection.SwitchParameterTypeInspection"
+                language="ArcCommandParams"
+                displayName="SwitchParameterTypeInspection"
+                groupName="Arc"
+                enabledByDefault="true"
+                level="INFORMATION"
+        />
     </extensions>
 </idea-plugin>

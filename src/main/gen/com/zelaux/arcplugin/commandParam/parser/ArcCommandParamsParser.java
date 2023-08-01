@@ -12,7 +12,7 @@ import com.intellij.lang.PsiParser;
 import com.intellij.lang.LightPsiParser;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
-public class ArcCommandParamParser implements PsiParser, LightPsiParser {
+public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
 
   public ASTNode parse(IElementType t, PsiBuilder b) {
     parseLight(t, b);
