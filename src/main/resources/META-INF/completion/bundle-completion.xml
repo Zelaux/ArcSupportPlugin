@@ -12,7 +12,10 @@
         <completion.confidence
                 implementationClass="com.zelaux.arcplugin.support.properties.completion.ArcPropCompletionConfidence"
                 language="UAST"/>
-        <psi.referenceContributor implementation="com.zelaux.arcplugin.support.properties.completion.PropReferenceContributor"
-                                  language="UAST"/>
+        <!--<psi.referenceContributor implementation="com.zelaux.arcplugin.support.properties.completion.PropReferenceContributor"
+                                  language="UAST"/>-->
+        <psi.referenceContributor
+                language="UAST"
+                implementation="com.zelaux.arcplugin.support.properties.completion.PropReferenceContributor"/>
     </extensions>
 </idea-plugin>
