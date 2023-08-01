@@ -35,6 +35,6 @@ public class ArcCommandParamFileType extends LanguageFileType {
 
     @Override
     public Icon getIcon() {
-    return PluginIcons.PluginIcon;
+    return PluginIcons.langIcon;
     }
 }

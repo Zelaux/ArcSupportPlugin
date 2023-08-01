@@ -18,7 +18,8 @@ public interface PluginIcons{
 
     /** 16x16 */
     @NotNull Icon Graph = load("icons/graph16_16_2.svg");
-    @NotNull Icon PluginIcon = load("META-INF/pluginIcon.svg");
+    @NotNull Icon PluginIcon100 = load("META-INF/pluginIcon.svg");
+    @NotNull Icon langIcon = load("icons/langIcon.svg");
     @NotNull Icon RECEIVER = AllIcons.Gutter.WriteAccess;
     @NotNull Icon SENDER = AllIcons.Gutter.ReadAccess;
 

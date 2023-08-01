@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 100 100" version="1.1">
+    <!--region A-->
+    <path d="M 92 100 q 0 -94 -92 -92" stroke="#992222" stroke-width="16" fill="none" />
+    <line x1="8" y1="100" x2="8" y2="3" stroke="#992222" stroke-width="16" fill="none" />
+    <line x1="8" y1="50" x2="85" y2="50" stroke="#992222" stroke-width="16" fill="none"/>
+
+    <path d="M 92 96 q 0 -88 -88 -88" stroke="#ff9999" stroke-width="8" fill="none" />
+    <line x1="8" y1="96" x2="8" y2="8" stroke="#ff9999" stroke-width="8" fill="none" />
+    <line x1="8" y1="50" x2="85" y2="50" stroke="#ff9999" stroke-width="8" fill="none"/>
+    <!--endregion-->
+    <!--region r-->
+    <path d="M 22 70 q 10 -10 20 0" stroke="#992222" stroke-width="8" fill="none" />
+    <line x1="22" y1="60" x2="22" y2="100" stroke="#992222" stroke-width="8" fill="none"/>
+
+
+    <path d="M 22 70 q 10 -10 18.5857 -1.4142" stroke="#ff9999" stroke-width="4" fill="none" />
+    <line x1="22" y1="62" x2="22" y2="98" stroke="#ff9999" stroke-width="4" fill="none"/>
+    <!--endregion-->
+    <!--region c-->
+    <path d="M 60 65 C 45 65, 45 96, 60 96" stroke="#992222" stroke-width="8" fill="none" />
+    <path d="M 60 65 q 10 0 10 10" stroke="#992222" stroke-width="8" fill="none" />
+    <path d="M 60 96 q 10 0 10 -10" stroke="#992222" stroke-width="8" fill="none" />
+
+    <path d="M 60 65 C 45 65, 45 96, 60 96" stroke="#ff9999" stroke-width="4" fill="none" />
+    <path d="M 60 65 q 10 0 10 8" stroke="#ff9999" stroke-width="4" fill="none" />
+    <path d="M 60 96 q 10 0 10 -8" stroke="#ff9999" stroke-width="4" fill="none" />
+    <!--endregion-->
+</svg>
