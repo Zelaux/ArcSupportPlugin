@@ -1,0 +1,43 @@
+{
+  parserClass="com.zelaux.arcplugin.commandParam.parser.ArcCommandParamParser"
+  parserUtilClass="com.intellij.lang.parser.GeneratedParserUtilBase"
+
+  psiClassPrefix="PsiArcCommandParams"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.zelaux.arcplugin.commandParam.psi"
+  psiImplPackage="com.zelaux.arcplugin.commandParam.psi.impl"
+  psiImplUtilClass="com.zelaux.arcplugin.commandParam.psi.impl.CommandParamPsiImplUtil"
+
+  elementTypeHolderClass="com.zelaux.arcplugin.commandParam.psi.CPTypes"
+  elementTypePrefix="CP_"
+  elementTypeClass="com.zelaux.arcplugin.commandParam.parsing.psi.tree.CommandParamElementType"
+  tokenTypeClass="com.zelaux.arcplugin.commandParam.parsing.psi.tree.CommandParamTokenType"
+
+  tokens = [
+    LEFT_BRACKET="["
+    RIGHT_BRACKET="]"
+    LEFT_ARROW="<"
+    RIGHT_ARROW=">"
+    DOTS="..."
+
+    SPACE=' '
+    IDENTIFIER="regexp:(\\.*|[^\s<>\[\].]+)+"
+  ]
+
+  implements("param")="com.zelaux.arcplugin.commandParam.psi.PsiArcCommandParamsParamI"
+  extends("optional_param|required_param")=param
+}
+it::=param_list
+
+param_list::=(optional_param|(required_param (SPACE required_param)*)) (SPACE optional_param)*
+
+param::=optional_param | required_param
+optional_param::=LEFT_BRACKET id variadic? RIGHT_BRACKET
+required_param::=LEFT_ARROW id variadic? RIGHT_ARROW{
+    name="required param"
+}
+variadic ::=DOTS
+id ::= IDENTIFIER {
+  name="identifier"
+}
+//grammar ::= grammar_element * // live preview root

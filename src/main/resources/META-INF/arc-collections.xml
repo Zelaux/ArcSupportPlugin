@@ -1,0 +1,11 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <localInspection language="UAST"
+                         displayName="Map.of method validator"
+                         groupName="Arc"
+                         enabledByDefault="true"
+                         implementationClass="com.zelaux.arcplugin.inspection.StaticMethodsInspection"/>
+
+        <postStartupActivity implementation="com.zelaux.arcplugin.activities.startup.PostfixTemplateFix"/>
+    </extensions>
+</idea-plugin>

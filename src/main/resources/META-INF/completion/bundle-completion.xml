@@ -1,0 +1,18 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <usageTargetProvider
+                implementation="com.zelaux.arcplugin.support.properties.findUsages.BundlePropertiesUsageTargetProvider"/>
+        <lang.findUsagesProvider language="Properties"
+                                 implementationClass="com.zelaux.arcplugin.support.properties.findUsages.BundlePropertiesFindUsagesProvider"/>
+        <usageTypeProvider implementation="com.zelaux.arcplugin.support.properties.findUsages.BundlePropertiesUsages"/>
+
+        <!--<completion.contributor
+                implementationClass="com.zelaux.arcplugin.support.properties.completion.PropCompletionContributor"
+                language="UAST"/>-->
+        <completion.confidence
+                implementationClass="com.zelaux.arcplugin.support.properties.completion.ArcPropCompletionConfidence"
+                language="UAST"/>
+        <psi.referenceContributor implementation="com.zelaux.arcplugin.support.properties.completion.PropReferenceContributor"
+                                  language="UAST"/>
+    </extensions>
+</idea-plugin>

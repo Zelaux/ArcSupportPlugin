@@ -1,0 +1,28 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+
+        <localInspection language="UAST"
+                         displayName="Color Hex validator"
+                         groupName="Arc"
+                         enabledByDefault="true"
+                         implementationClass="com.zelaux.arcplugin.inspection.ArcHexColorInspection"/>
+
+        <postStartupActivity implementation="com.zelaux.arcplugin.activities.CustomNodeRendererSettingsSetup"/>
+
+
+        <codeInsight.lineMarkerProvider language="UAST" implementationClass="com.zelaux.arcplugin.marker.color.CustomColorLineMarkerProvider"/>
+        <codeInsight.lineMarkerProvider language="UAST" implementationClass="com.zelaux.arcplugin.marker.colorexp.ExpressionSequenceParserLineMarkerProvider"/>
+
+
+    </extensions>
+
+    <extensions defaultExtensionNs="com.zelaux.arcplugin">
+        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.colorexp.ArcDrawColorExpProvider"/>
+        <!--suppress PluginXmlValidity -->
+        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.colorexp.ArcColorExpressionProvider"/>
+        <!--suppress PluginXmlValidity -->
+        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.colorexp.FieldAccessColorExpProvider"/>
+        <!--suppress PluginXmlValidity -->
+        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.interp.InterpParserProvider"/>
+    </extensions>
+</idea-plugin>

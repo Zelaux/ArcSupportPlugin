@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="LanguageInjectionConfiguration">
+    <injection language="ArcCommandParams" injector-id="java">
+        <display-name>CommandParams</display-name>
+        <place><![CDATA[psiParameter()
+                .ofMethod(1, psiMethod()
+                        .withName("register")
+                .withParameters("java.lang.String","java.lang.String","java.lang.String","?")
+                        .definedInClass("arc.util.CommandHandler"))]]></place>
+    </injection>
+</component>

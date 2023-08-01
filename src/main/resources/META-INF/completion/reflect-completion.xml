@@ -1,0 +1,10 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+
+        <psi.referenceContributor language="JAVA" implementation="com.zelaux.arcplugin.psi.impl.source.resolve.reference.impl.ArcReflectionReferenceContributor"/>
+
+        <completion.confidence
+                implementationClass="com.zelaux.arcplugin.psi.impl.source.resolve.reference.impl.ArcReflectionCompletionConfidence"
+                language="UAST"/>
+    </extensions>
+</idea-plugin>

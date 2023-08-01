@@ -1,0 +1,137 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.zelaux.arcplugin</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>ArcSupportPlugin</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://github.com/Zelaux">Zelaux</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[<h1 id="arcsupportplugin">ArcSupportPlugin</h1>
+    <h2 id="description">Description</h2>
+    <hr>
+    <p>That plugin supports framework <a href="https://github.com/Anuken/Arc">Anuken/Arc</a></p>
+    <h2 id="features">Features</h2>
+    <hr>
+    <h4 id="debug-renderers">Debug Renderers</h4>
+    <ul>
+        <li><code>arc.graphics.Color</code></li>
+        <li><code>arc.files.Fi</code></li>
+    </ul>
+    <h4 id="debug-previews">Debug Previews</h4>
+    <ul>
+        <li><code>arc.graphics.Color</code></li>
+    </ul>
+    <h4 id="line-markers">Line Markers</h4>
+    <ul>
+        <li>manipulation <code>arc.graphics.Color</code>(calculation &amp; editing color)</li>
+        <li>displays buildin <code>arc.math.Interp</code> as interactive graphics</li>
+    </ul>
+    <h4 id="inspections">Inspections</h4>
+    <ul>
+        <li>checks hex in <code>arc.graphics.Color.valueOf(__)</code></li>
+        <li>argument count checking in <code>Map.of</code> methods</li>
+        <li>(raw) type checking in <code>Map.of</code> methods</li>
+        <li>Detects wrong variadic parameter position in <code>CommandHandler</code>.</li>
+        <li>Highlights parameters with duplicated names.</li>
+    </ul>
+    <h4 id="completion-resolving">Completion &amp; Resolving</h4>
+    <ul>
+        <li>for properties in for <code>@property</code></li>
+        <li>for reflect members in <code>arc.util.Reflect</code></li>
+    </ul>
+    <h4 id="postfix-templates">Postfix Templates</h4>
+    <ul>
+        <li><code>intSet.iter</code> -&gt;<pre><code><span class="hljs-type">IntIterator</span> <span class="hljs-keyword">iterator</span>=intSet.<span class="hljs-keyword">iterator</span>();
+<span class="hljs-keyword">while</span>(<span class="hljs-keyword">iterator</span>.hasNext){
+    <span class="hljs-built_in">int</span> next=<span class="hljs-keyword">iterator</span>.next();
+}
+</code></pre></li>
+        <li><code>intSet.seq</code> -&gt; <code>intSet.iterator().toArray()</code></li>
+        <li><code>dataOutput.writes</code> -&gt; <code>new Writes(dataOutput)</code></li>
+        <li><code>dataInput.reads</code> -&gt; <code>new Reads(dataInput)</code></li>
+        <li><code>bytes</code>-&gt;<code>new Reads(new DataInput(bytes))</code></li>
+    </ul>
+    <h3 id="added-languages">Added Languages</h3>
+    <h4 id="language-for-supporting-params-in-arc-util-commandhandler-languageid-arccommandparams-">language for supporting params in arc.util.CommandHandler(LanguageID ArcCommandParams)</h4>
+    <ul>
+        <li>Parsing</li>
+        <li>Highlighting</li>
+        <li>BraceMatching</li>
+        <li>Injection in arc.util.CommandHandler.register</li>
+    </ul>
+        ]]></description>
+    <depends>com.intellij.modules.java</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>org.intellij.intelliLang</depends>
+    <depends>com.intellij.properties</depends>
+<!--    <depends>com.intellij.modules.all</depends>-->
+
+    <!--Java plugin dependencies-->
+    <!--    <depends>com.intellij.modules.platform</depends>-->
+    <!--    <depends>com.intellij.modules.lang</depends>-->
+    <!--    <depends>com.intellij.modules.vcs</depends>-->
+    <!--    <depends>com.intellij.modules.xdebugger</depends>-->
+    <!--    <depends>com.intellij.modules.xml</depends>-->
+    <!--    <depends>com.intellij.modules.java-capable</depends>-->
+    <!--    <depends>com.intellij.modules.lang</depends>-->
+    <!--    <depends>com.intellij.properties</depends>-->
+    <!--    <depends>com.intellij.modules.xdebugger</depends>-->
+
+<!--    <depends optional="true" config-file="images-integration.xml">com.intellij.platform.images</depends>-->
+<!--    <depends config-file="settings.xml">com.intellij.modules.java</depends>-->
+<!--    <depends config-file="debug.xml">com.intellij.modules.java</depends>-->
+    <!--suppress XmlPathReference -->
+    <xi:include href="/META-INF/debug.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <!--suppress XmlPathReference -->
+    <xi:include href="/META-INF/settings.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+
+    <extensionPoints>
+        <extensionPoint name="customColorProvider" interface="com.zelaux.arcplugin.marker.color.ElementColorViewerProvider" dynamic="true"/>
+        <extensionPoint name="expressionParserSequenceProvider" interface="com.zelaux.arcplugin.marker.ExpParserSeqProvider" dynamic="true"/>
+    </extensionPoints>
+
+    <xi:include href="/META-INF/color.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/arc-collections.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/plugin_extensions_points.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/completion/bundle-completion.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/completion/reflect-completion.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <!--suppress XmlPathReference -->
+    <xi:include href="/META-INF/plugin_extensions.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/customLang/arc_command_params_lang.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+
+    <actions>
+        <!--<action id="SwitchColorExprTabMode" class="com.zelaux.arcplugin.actions.SwitchColorExprTabMode" text="view color expression sequance as list">
+            <add-to-group group-id="ColorExprTabsEntryPoint"/>
+        </action>-->
+        <action
+                id="SwitchColorExprTabMode"
+                class="com.zelaux.arcplugin.actions.SwitchColorExprTabMode"
+                text="view color expression sequance as list"/>
+
+        <group id="ColorExprTabsEntryPoint" popup="true" icon="AllIcons.Actions.More">
+            <reference id="SwitchColorExprTabMode"/>
+            <!--            <reference id="RecentLocations"/>-->
+            <!--            <separator/>-->
+            <!--            <reference id="CloseAllEditors"/>-->
+            <!--            <reference id="ReopenClosedTab"/>-->
+            <!--            <separator/>-->
+            <!--            <reference id="Unsplit"/>-->
+            <!--            <reference id="UnsplitAll"/>-->
+            <!--            <reference id="ChangeSplitOrientation"/>-->
+            <!--            <separator/>-->
+            <!--            <reference id="ConfigureEditorTabs"/>-->
+            <add-to-group group-id="WindowMenu"/>
+        </group>
+    </actions>
+
+</idea-plugin>

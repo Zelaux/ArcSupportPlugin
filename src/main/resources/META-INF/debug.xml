@@ -1,0 +1,9 @@
+<idea-plugin >
+<!--    <depends>com.intellij.modules.java</depends>-->
+<!--    <depends>com.intellij.properties</depends>-->
+    <extensions defaultExtensionNs="com.intellij">
+        <debugger.compoundRendererProvider implementation="com.zelaux.arcplugin.debugger.ui.tree.render.ArcColorCompoundRendererProvider"/>
+        <debugger.compoundRendererProvider implementation="com.zelaux.arcplugin.debugger.ui.tree.render.FiObjectRenderer"/>
+        <previewHintProvider implementation="com.zelaux.arcplugin.codeInsight.preview.ArcColorPreviewHintProvider"/>
+    </extensions>
+</idea-plugin>

@@ -1,0 +1,36 @@
+<idea-plugin>
+
+    <extensions defaultExtensionNs="com.intellij.lang">
+
+        <parserDefinition language="ArcCommandParams"
+                          implementationClass="com.zelaux.arcplugin.commandParam.psi.ArcCommandParamsParserDefinition"/>
+        <syntaxHighlighterFactory language="ArcCommandParams"
+                                  implementationClass="com.zelaux.arcplugin.commandParam.highlight.ArcCommandParamsSyntaxHighlighterFactory"/>
+        <braceMatcher language="ArcCommandParams"
+                      implementationClass="com.zelaux.arcplugin.commandParam.highlight.ArcCommandParamsPairedBraceMatcher"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="org.intellij.intelliLang">
+        <injectionConfig config="resources/arcCommandParamsInjection.xml"/>
+    </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType language="ArcCommandParams"
+                  implementationClass="com.zelaux.arcplugin.commandParam.ArcCommandParamFileType"
+                  name="ArcCommandParams"/>
+        <localInspection
+                implementationClass="com.zelaux.arcplugin.commandParam.inspection.VariadicParamPositionInspection"
+                language="ArcCommandParams"
+                displayName="VariadicParameterInspection"
+                groupName="Arc"
+                enabledByDefault="true"
+                level="ERROR"
+        />
+        <localInspection implementationClass="com.zelaux.arcplugin.commandParam.inspection.DuplicatedNamesInspection"
+                         language="ArcCommandParams"
+                         displayName="DuplicatedParameterInspection"
+                         groupName="Arc"
+                         enabledByDefault="true"
+                         level="WARNING"
+        />
+    </extensions>
+</idea-plugin>

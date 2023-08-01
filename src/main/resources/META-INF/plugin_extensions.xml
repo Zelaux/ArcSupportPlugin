@@ -1,0 +1,15 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+
+        <postStartupActivity implementation="com.zelaux.arcplugin.activities.startup.WelcomeStartupActivity"/>
+
+        <postStartupActivity implementation="com.zelaux.arcplugin.activities.CustomNodeRendererSettingsSetup"/>
+
+
+
+
+        <codeInsight.template.postfixTemplateProvider language="JAVA" implementationClass="com.zelaux.arcplugin.codeInsight.template.postfix.ArcPostfixTemplateProvider"/>
+<!--        <codeInsight.lineMarkerProvider language="UAST"-->
+<!--                                        implementationClass="com.zelaux.arcplugin.support.events.EventLineMarkerProvider"/>-->
+    </extensions>
+</idea-plugin>
