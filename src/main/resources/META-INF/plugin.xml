@@ -71,25 +71,8 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>org.intellij.intelliLang</depends>
     <depends>com.intellij.properties</depends>
-<!--    <depends>com.intellij.modules.all</depends>-->
 
-    <!--Java plugin dependencies-->
-    <!--    <depends>com.intellij.modules.platform</depends>-->
-    <!--    <depends>com.intellij.modules.lang</depends>-->
-    <!--    <depends>com.intellij.modules.vcs</depends>-->
-    <!--    <depends>com.intellij.modules.xdebugger</depends>-->
-    <!--    <depends>com.intellij.modules.xml</depends>-->
-    <!--    <depends>com.intellij.modules.java-capable</depends>-->
-    <!--    <depends>com.intellij.modules.lang</depends>-->
-    <!--    <depends>com.intellij.properties</depends>-->
-    <!--    <depends>com.intellij.modules.xdebugger</depends>-->
-
-<!--    <depends optional="true" config-file="images-integration.xml">com.intellij.platform.images</depends>-->
-<!--    <depends config-file="settings.xml">com.intellij.modules.java</depends>-->
-<!--    <depends config-file="debug.xml">com.intellij.modules.java</depends>-->
-    <!--suppress XmlPathReference -->
     <xi:include href="/META-INF/debug.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <!--suppress XmlPathReference -->
     <xi:include href="/META-INF/settings.xml"  xpointer="xpointer(/idea-plugin/*)"/>
 
     <extensionPoints>
@@ -102,17 +85,10 @@
     <xi:include href="/META-INF/plugin_extensions_points.xml"  xpointer="xpointer(/idea-plugin/*)"/>
     <xi:include href="/META-INF/completion/bundle-completion.xml"  xpointer="xpointer(/idea-plugin/*)"/>
     <xi:include href="/META-INF/completion/reflect-completion.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <!--suppress XmlPathReference -->
     <xi:include href="/META-INF/plugin_extensions.xml"  xpointer="xpointer(/idea-plugin/*)"/>
     <xi:include href="/META-INF/customLang/arc_command_params_lang.xml"  xpointer="xpointer(/idea-plugin/*)"/>
 
-    <!-- Extension points defined by the plugin.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
-
     <actions>
-        <!--<action id="SwitchColorExprTabMode" class="com.zelaux.arcplugin.actions.SwitchColorExprTabMode" text="view color expression sequance as list">
-            <add-to-group group-id="ColorExprTabsEntryPoint"/>
-        </action>-->
         <action
                 id="SwitchColorExprTabMode"
                 class="com.zelaux.arcplugin.actions.SwitchColorExprTabMode"
@@ -120,16 +96,6 @@
 
         <group id="ColorExprTabsEntryPoint" popup="true" icon="AllIcons.Actions.More">
             <reference id="SwitchColorExprTabMode"/>
-            <!--            <reference id="RecentLocations"/>-->
-            <!--            <separator/>-->
-            <!--            <reference id="CloseAllEditors"/>-->
-            <!--            <reference id="ReopenClosedTab"/>-->
-            <!--            <separator/>-->
-            <!--            <reference id="Unsplit"/>-->
-            <!--            <reference id="UnsplitAll"/>-->
-            <!--            <reference id="ChangeSplitOrientation"/>-->
-            <!--            <separator/>-->
-            <!--            <reference id="ConfigureEditorTabs"/>-->
             <add-to-group group-id="WindowMenu"/>
         </group>
     </actions>
