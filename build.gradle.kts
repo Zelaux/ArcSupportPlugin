@@ -9,8 +9,8 @@ plugins {
 }
 val arcVersion = "v141.1"
 
-group = "com.github.arc"
-version = "0.31"
+group = "com.github.Zelaux"
+version = "0.5"
 
 repositories {
     mavenCentral()
