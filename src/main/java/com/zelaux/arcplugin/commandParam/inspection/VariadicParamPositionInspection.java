@@ -6,20 +6,15 @@ import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.codeInspection.util.IntentionFamilyName;
-import com.intellij.designer.model.QuickFix;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.zelaux.arcplugin.commandParam.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 public class VariadicParamPositionInspection extends LocalInspectionTool {
     @Override
@@ -38,7 +33,7 @@ public class VariadicParamPositionInspection extends LocalInspectionTool {
                         if (!o.isOptional() && paramList.get(paramList.size()-1).isOptional()) {
                             holder.registerProblem(o, "Variadic parameter must be the last[No Fix]" );
                         }else {
-                            holder.registerProblem(o, "Variadic parameter must be the last", new MyQuickFix());
+                            holder.registerProblem(o, "Variadic parameter must be the last", new RearrangeFix());
                         }
                     }
                     int counter=0;
@@ -52,7 +47,7 @@ public class VariadicParamPositionInspection extends LocalInspectionTool {
             }
         };
     }
-    static class MyQuickFix implements LocalQuickFix {
+    static class RearrangeFix implements LocalQuickFix {
 
         @Override
         public @IntentionFamilyName @NotNull String getFamilyName() {

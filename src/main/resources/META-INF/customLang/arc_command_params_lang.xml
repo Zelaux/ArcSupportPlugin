@@ -40,5 +40,11 @@
                 enabledByDefault="true"
                 level="INFORMATION"
         />
+        <localInspection implementationClass="com.zelaux.arcplugin.commandParam.inspection.ParameterOrderInspection"
+                         language="ArcCommandParams"
+                         displayName="ParameterOrderInspection"
+                         groupName="Arc"
+                         enabledByDefault="true"
+                         level="ERROR"/>
     </extensions>
 </idea-plugin>

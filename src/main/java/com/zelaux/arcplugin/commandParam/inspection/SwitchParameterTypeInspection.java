@@ -21,6 +21,7 @@ public class SwitchParameterTypeInspection extends LocalInspectionTool {
         return new PsiACPVisitor() {
             @Override
             public void visitRequiredParam(@NotNull PsiACPRequiredParam o) {
+                if(!ParameterOrderInspection.isMyCase(o))
                 holder.registerProblem(o, "Transform to optional", new ToOptional());
             }
 
@@ -31,7 +32,7 @@ public class SwitchParameterTypeInspection extends LocalInspectionTool {
         };
     }
 
-    private static class ToOptional implements LocalQuickFix {
+    static class ToOptional implements LocalQuickFix {
         @Override
         public @IntentionFamilyName @NotNull String getFamilyName() {
             return "ParameterTransformation";
@@ -46,12 +47,16 @@ public class SwitchParameterTypeInspection extends LocalInspectionTool {
         public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
             PsiACPRequiredParam param = (PsiACPRequiredParam) descriptor.getPsiElement();
             WriteAction.run(() -> {
-                param.replace(PsiACPFactory.createOptionalParam(project, param.getParameterName(), param.isVariadic()));
+                changeToOptional(project, param);
             });
+        }
+
+        public static void changeToOptional(@NotNull Project project, PsiACPRequiredParam param) {
+            param.replace(PsiACPFactory.createOptionalParam(project, param.getParameterName(), param.isVariadic()));
         }
     }
 
-    private static class ToRequired implements LocalQuickFix {
+    static class ToRequired implements LocalQuickFix {
         @Override
         public @IntentionFamilyName @NotNull String getFamilyName() {
             return "ParameterTransformation";
@@ -65,8 +70,12 @@ public class SwitchParameterTypeInspection extends LocalInspectionTool {
         public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
             PsiACPOptionalParam param = (PsiACPOptionalParam) descriptor.getPsiElement();
             WriteAction.run(() -> {
-                param.replace(PsiACPFactory.createRequiredParam(project, param.getParameterName(), param.isVariadic()));
+                changeToRequired(project, param);
             });
+        }
+
+        public static void changeToRequired(@NotNull Project project, PsiACPOptionalParam param) {
+            param.replace(PsiACPFactory.createRequiredParam(project, param.getParameterName(), param.isVariadic()));
         }
     }
 }

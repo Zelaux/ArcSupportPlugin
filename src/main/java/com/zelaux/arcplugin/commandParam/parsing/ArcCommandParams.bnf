@@ -27,9 +27,9 @@
   implements("param")="com.zelaux.arcplugin.commandParam.psi.PsiACPParamI"
   extends("optional_param|required_param")=param
 }
-it::=param_list
+expression::=param_list?
 
-param_list::=(optional_param|(required_param (SPACE required_param)*)) (SPACE optional_param)*
+param_list::=param (SPACE param)*
 
 param::=optional_param | required_param
 optional_param::=LEFT_BRACKET id variadic? RIGHT_BRACKET

@@ -25,6 +25,7 @@ public class JavaPostfixTemplateExpressionTypeCondition implements JavaPostfixTe
     @Override
     public boolean value(@NotNull PsiExpression element) {
         PsiType type = element.getType();
+        if(type==null)return false;
         return myTypeValidator.get(type);
 //        return type != null && InheritanceUtil.isInheritor(type, myFqn);
     }

@@ -32,12 +32,20 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
   }
 
   static boolean parse_root_(IElementType t, PsiBuilder b, int l) {
-    return it(b, l + 1);
+    return expression(b, l + 1);
   }
 
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
     create_token_set_(CP_OPTIONAL_PARAM, CP_PARAM, CP_REQUIRED_PARAM),
   };
+
+  /* ********************************************************** */
+  // param_list?
+  static boolean expression(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expression")) return false;
+    param_list(b, l + 1);
+    return true;
+  }
 
   /* ********************************************************** */
   // IDENTIFIER
@@ -49,12 +57,6 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, CP_IDENTIFIER);
     exit_section_(b, l, m, r, false, null);
     return r;
-  }
-
-  /* ********************************************************** */
-  // param_list
-  static boolean it(PsiBuilder b, int l) {
-    return param_list(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -93,63 +95,19 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (optional_param|(required_param (SPACE required_param)*)) (SPACE optional_param)*
+  // param (SPACE param)*
   public static boolean param_list(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "param_list")) return false;
     if (!nextTokenIs(b, "<param list>", CP_LEFT_ARROW, CP_LEFT_BRACKET)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, CP_PARAM_LIST, "<param list>");
-    r = param_list_0(b, l + 1);
+    r = param(b, l + 1);
     r = r && param_list_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // optional_param|(required_param (SPACE required_param)*)
-  private static boolean param_list_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "param_list_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = optional_param(b, l + 1);
-    if (!r) r = param_list_0_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // required_param (SPACE required_param)*
-  private static boolean param_list_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "param_list_0_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = required_param(b, l + 1);
-    r = r && param_list_0_1_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (SPACE required_param)*
-  private static boolean param_list_0_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "param_list_0_1_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!param_list_0_1_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "param_list_0_1_1", c)) break;
-    }
-    return true;
-  }
-
-  // SPACE required_param
-  private static boolean param_list_0_1_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "param_list_0_1_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, CP_SPACE);
-    r = r && required_param(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (SPACE optional_param)*
+  // (SPACE param)*
   private static boolean param_list_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "param_list_1")) return false;
     while (true) {
@@ -160,13 +118,13 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // SPACE optional_param
+  // SPACE param
   private static boolean param_list_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "param_list_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, CP_SPACE);
-    r = r && optional_param(b, l + 1);
+    r = r && param(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
