@@ -32,12 +32,12 @@ public class WelcomeStartupActivity implements StartupActivity {
     @Override
     public void runActivity(@NotNull Project project) {
         var statusBar = WindowManager.getInstance().getStatusBar(project);
-        ReadAction.nonBlocking(() -> {
+        /*ReadAction.nonBlocking(() -> {
             for (Module module : ModuleManager.getInstance(project).getModules()) {
                 EventLineMarkerProvider.getEventListenersCached(module, null);
                 EventLineMarkerProvider.getFirePointsCached(module, null);
             }
-        });
+        });*/
         moveSomeStuff();
 
         /*EventLineMarkerProvider.*/

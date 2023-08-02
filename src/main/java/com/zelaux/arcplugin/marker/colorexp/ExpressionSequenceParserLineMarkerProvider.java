@@ -111,7 +111,7 @@ public class ExpressionSequenceParserLineMarkerProvider extends LineMarkerProvid
 
 //                expressionParser.showColorPicker(element, e, elt, editor);
             },
-            GutterIconRenderer.Alignment.LEFT);
+            GutterIconRenderer.Alignment.LEFT,null);
 this.ref=ref;
             myColor = ref.get().getIconColor();
 //            this.highlighter
