@@ -18,7 +18,6 @@ repositories {
 }
 dependencies {
     implementation("com.github.Anuken.Arc:arc-core:$arcVersion")
-//    implementation("edu.brown.cs.burlap:arc-burlap:3.0.1")
 }
 
 // Configure Gradle IntelliJ Plugin
@@ -41,9 +40,6 @@ sourceSets {
 }
 tasks.register("copyPlugin") {
     dependsOn("prepareSandbox")
-    doFirst {
-//        delete(file("D:\\my apps\\IntelliJ IDEA Community Edition 2022.2\\plugins\\ZelauxArcPlugin"))
-    }
     doLast {
 //        FileUtils
         copy {
@@ -66,27 +62,13 @@ tasks {
 
         val compilerArgs = options.compilerArgs
         compilerArgs.addAll(listOf("--add-exports", "java.desktop/sun.awt.image=ALL-UNNAMED"))
-//        compilerArgs.addAll(listOf("--add-exports/java.desktop/sun.awt.image=ALL-UNNAMED"))
-//        compilerArgs.addAll(listOf("--add-exports java.desktop/sun.awt.image=ALL-UNNAMED"))
     }
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = "11"
-
-//        compilerArgs.addAll(listOf("-opt-in","kotlin.RequiresOptIn"))
     }
     this.getByName("setupInstrumentCode").actions.clear();
     this.getByName("instrumentCode").actions.clear();
     this.getByName("postInstrumentCode").actions.clear();
-    val t_tasks = this;
-    this.getByName("setupDependencies").doFirst {
-        t_tasks.jar {
-//            from {
-            /*configurations["compileClasspath"].map { if (it.isDirectory) it else zipTree(it) }
-                .forEach { from(it) }*/
-//            }
-        }
-//    this.getByName("jar").dependsOn.clear()
-    };
     patchPluginXml {
         sinceBuild.set("222.3345.118")
         untilBuild.set("232")
@@ -102,70 +84,11 @@ tasks {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
 }
-project(rootProject.path) {
-
-    tasks.jar {
-        /*var clazz: Class<out Any?> = javaClass;
-        println(clazz)
-        while (clazz.superclass != null && clazz.simpleName != "AbstractCopyTask") {
-            clazz = clazz.superclass
-            println(clazz)
-        }
-//    println(javaClass)
-//    println(javaClass.superclass)
-//    println(javaClass.superclass.superclass)
-//    println(javaClass.superclass.superclass.superclass)
-//    println(javaClass.superclass.superclass.superclass.superclass)
-//    println(javaClass.superclass.superclass.superclass.superclass.superclass)
-//    println("declaredFields: " + clazz.declaredFields.joinToString { it.name })
-//    println("fields: " + clazz.fields.joinToString { it.name })
-//    println("declaredMethods: " + clazz.declaredMethods.joinToString { it.name })
-//    println("methods: " + clazz.methods.joinToString { it.name })
-        val field = clazz.getDeclaredField("mainSpec")
-        field.isAccessible = true;
-//    getMainSpec()
-//    val mainSpec=field[this] as org.gradle.api.internal.file.copy.CopySpecInternal;
-        val mainSpec = field[this] as DefaultCopySpec;
-        println("mainSpec: " + mainSpec)
-        println("mainSpec: " + mainSpec.javaClass)
-        val sourcePathsField = DefaultCopySpec::class.java.getDeclaredField("sourcePaths")
-        sourcePathsField.isAccessible=true
-        val sourcePaths = sourcePathsField[mainSpec]  as org.gradle.api.internal.file.collections.DefaultConfigurableFileCollection
-
-        println("mainSpec.sourcePaths: " + mainSpec.sourcePaths)
-        println("mainSpec.sourcePaths.clazz: " + mainSpec.sourcePaths.javaClass)
-        println("mainSpec.sourcePaths2: " + sourcePaths)
-        println("mainSpec.sourcePaths2.clazz: " + sourcePaths.javaClass)*/
-        /*   val idea = rootProject.configurations["idea"]
-           val ideaPlugins = rootProject.configurations["ideaPlugins"]
-           rootProject.configurations.remove(ideaPlugins)
-           configurations["compileClasspath"].map { if (it.isDirectory) it else zipTree(it) }.forEach {
-               from(it)
-   //        mainSpec.from(it)
-           }
-           rootProject.configurations.add(ideaPlugins)*/
-    }
-}
-/*    from {
-
-//            configurations.getAt("compile"){
-//                this.
-//                collect { it.isDirectory() ? it : zipTree(it) }
-//            }
-    }*/
-/*jar {
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}*/
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
     languageVersion = "1.7"
 }
 // Generated content
-sourceSets.main{
-
-}
 sourceSets {
     main {
         java {
