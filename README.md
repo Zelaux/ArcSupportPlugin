@@ -2,11 +2,18 @@
 [![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/22399-arcsupportplugin)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/22399-arcsupportplugin)
 ## Description
-- - -
+
+---
 That plugin supports framework [Anuken/Arc](https://github.com/Anuken/Arc)
 
+## [Previews](PREVIEWS.md)
+
+---
+
+
 ## Features
-- - -
+
+---
 
 #### Debug Renderers
 - `arc.graphics.Color`
