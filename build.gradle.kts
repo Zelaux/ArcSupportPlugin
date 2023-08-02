@@ -88,8 +88,8 @@ tasks {
 //    this.getByName("jar").dependsOn.clear()
     };
     patchPluginXml {
-        sinceBuild.set("213")
-        untilBuild.set("223.*")
+        sinceBuild.set("222.3345.118")
+        untilBuild.set("232")
     }
 
     signPlugin {
