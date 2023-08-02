@@ -1,5 +1,5 @@
 ![pluginIcon.svg](src%2Fmain%2Fresources%2FMETA-INF%2FpluginIcon.svg)
-# ArcSupportPlugin
+# Arc Support
 
 [![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/22399-arcsupportplugin)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/22399-arcsupportplugin)
