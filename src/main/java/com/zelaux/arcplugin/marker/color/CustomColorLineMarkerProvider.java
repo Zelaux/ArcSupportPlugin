@@ -78,7 +78,7 @@ public class CustomColorLineMarkerProvider extends LineMarkerProviderDescriptor{
 
                 viewer.showColorPicker(element, e, elt, editor);
             },
-            GutterIconRenderer.Alignment.LEFT,null);
+            GutterIconRenderer.Alignment.LEFT,()->"Color Preview");
             myColor = viewer.getColor();
         }
 

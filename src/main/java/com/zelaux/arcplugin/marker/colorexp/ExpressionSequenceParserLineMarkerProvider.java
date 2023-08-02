@@ -19,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
+import java.util.function.Supplier;
 
 @SuppressWarnings("UseJBColor")
 public class ExpressionSequenceParserLineMarkerProvider extends LineMarkerProviderDescriptor{
@@ -93,25 +94,25 @@ public class ExpressionSequenceParserLineMarkerProvider extends LineMarkerProvid
         MyInfo( final ExpressionParserSequenceRef ref){
             super(ref.element,
 //            element.getTextRange(),
-            ref.get().getTextRange(),
-            ref.get().getIcon(),
+                    ref.get().getTextRange(),
+                    ref.get().getIcon(),
 //            JBUIScale.scaleIcon(new ColorIcon(12, ref.get().getResultColor())),
-            FunctionUtil.<Object, String>nullConstant(),
-            (e, elt) -> {
+                    FunctionUtil.<Object, String>nullConstant(),
+                    (e, elt) -> {
 
 //                if(!elt.isWritable() || !expressionParser.isWritable()) return;
 
-                if(!ref.element.isValid()){
-                    ref.update(elt);
+                        if (!ref.element.isValid()) {
+                            ref.update(elt);
 //                    myColor=ref.get().getResultColor();
-                }
-                final Editor editor = PsiEditorUtil.findEditor(ref.element);
-                assert editor != null;
-                ref.get().showPopup(ref.element.getProject(), editor, ref.element.isWritable());
+                        }
+                        final Editor editor = PsiEditorUtil.findEditor(ref.element);
+                        assert editor != null;
+                        ref.get().showPopup(ref.element.getProject(), editor, ref.element.isWritable());
 
 //                expressionParser.showColorPicker(element, e, elt, editor);
-            },
-            GutterIconRenderer.Alignment.LEFT,null);
+                    },
+                    GutterIconRenderer.Alignment.LEFT,()->"Color Preview");
 this.ref=ref;
             myColor = ref.get().getIconColor();
 //            this.highlighter
