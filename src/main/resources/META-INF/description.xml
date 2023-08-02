@@ -1,0 +1,60 @@
+<idea-plugin>
+    <description><![CDATA[<h1 id="arcsupportplugin">ArcSupportPlugin</h1>
+    <h2 id="description">Description</h2>
+    <hr>
+    <p>That plugin supports framework <a href="https://github.com/Anuken/Arc">Anuken/Arc</a></p>
+    <h2 id="-previews-https-github-com-zelaux-arcsupportplugin-blob-master-previews-md-"><a href="https://github.com/Zelaux/ArcSupportPlugin/blob/master/PREVIEWS.md">Previews</a></h2>
+    <hr>
+    <h2 id="features">Features</h2>
+    <hr>
+    <h4 id="debug-renderers">Debug Renderers</h4>
+    <ul>
+        <li><code>arc.graphics.Color</code></li>
+        <li><code>arc.files.Fi</code></li>
+    </ul>
+    <h4 id="debug-previews">Debug Previews</h4>
+    <ul>
+        <li><code>arc.graphics.Color</code></li>
+    </ul>
+    <h4 id="line-markers">Line Markers</h4>
+    <ul>
+        <li>manipulation <code>arc.graphics.Color</code>(calculation &amp; editing color)</li>
+        <li>displays buildin <code>arc.math.Interp</code> as interactive graphics</li>
+    </ul>
+    <h4 id="inspections">Inspections</h4>
+    <ul>
+        <li>checks hex in <code>arc.graphics.Color.valueOf(__)</code></li>
+        <li>argument count checking in <code>Map.of</code> methods</li>
+        <li>(raw) type checking in <code>Map.of</code> methods</li>
+        <li>Detects wrong variadic parameter position in <code>CommandHandler</code>.</li>
+        <li>Highlights parameters with duplicated names.</li>
+        <li>Transforms required parameter &lt;-&gt; optional parameter</li>
+        <li>Reports about wrong order in CommandHandler params</li>
+    </ul>
+    <h4 id="completion-resolving">Completion &amp; Resolving</h4>
+    <ul>
+        <li>for properties in for <code>@property</code></li>
+        <li>for reflect members in <code>arc.util.Reflect</code></li>
+    </ul>
+    <h4 id="postfix-templates">Postfix Templates</h4>
+    <ul>
+        <li><code>intSet.iter</code> -&gt;<pre><code><span class="hljs-type">IntIterator</span> <span class="hljs-keyword">iterator</span>=intSet.<span class="hljs-keyword">iterator</span>();
+<span class="hljs-keyword">while</span>(<span class="hljs-keyword">iterator</span>.hasNext){
+    <span class="hljs-built_in">int</span> next=<span class="hljs-keyword">iterator</span>.next();
+}
+</code></pre></li>
+        <li><code>intSet.seq</code> -&gt; <code>intSet.iterator().toArray()</code></li>
+        <li><code>dataOutput.writes</code> -&gt; <code>new Writes(dataOutput)</code></li>
+        <li><code>dataInput.reads</code> -&gt; <code>new Reads(dataInput)</code></li>
+        <li><code>bytes</code>-&gt;<code>new Reads(new DataInput(bytes))</code></li>
+    </ul>
+    <h3 id="added-languages">Added Languages</h3>
+    <h4 id="language-for-supporting-params-in-arc-util-commandhandler-languageid-arccommandparams-">language for supporting params in arc.util.CommandHandler(LanguageID ArcCommandParams)</h4>
+    <ul>
+        <li>Parsing</li>
+        <li>Highlighting</li>
+        <li>BraceMatching</li>
+        <li>Injection in arc.util.CommandHandler.register</li>
+    </ul>
+        ]]></description>
+</idea-plugin>

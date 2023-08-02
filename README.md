@@ -35,6 +35,8 @@ That plugin supports framework [Anuken/Arc](https://github.com/Anuken/Arc)
 - (raw) type checking in `Map.of` methods
 - Detects wrong variadic parameter position in `CommandHandler`.
 - Highlights parameters with duplicated names.
+- Transforms required parameter <-> optional parameter
+- Reports about wrong order in CommandHandler params
 
 #### Completion & Resolving
 - for properties in for `@property`
