@@ -5,6 +5,7 @@ import com.intellij.ui.colorpicker.*
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CustomShortcutSet
 import com.intellij.openapi.project.DumbAwareAction
+import com.intellij.ui.Gray
 import com.intellij.ui.JBColor
 import com.intellij.ui.picker.ColorListener
 import com.intellij.util.ui.JBUI
@@ -15,7 +16,7 @@ import java.awt.Dimension
 import java.awt.event.ActionEvent
 import javax.swing.*
 
-val PICKER_BACKGROUND_COLOR = JBColor(Color(252, 252, 252), Color(64, 64, 64))
+val PICKER_BACKGROUND_COLOR = JBColor(Gray._252, Gray._64)
 val PICKER_TEXT_COLOR = Color(186, 186, 186)
 
 

@@ -31,7 +31,6 @@ import com.zelaux.arcplugin.utils.RelodableLazy
 import com.zelaux.arcplugin.utils.relodableLazy
 import com.zelaux.arcplugin.utils.resolveElement
 import com.zelaux.arcplugin.utils.resolveRecursiveField
-import com.zelaux.arcplugin.utils.ui.MultiIcon
 import java.awt.Component
 import java.awt.Dimension
 import java.awt.Graphics
@@ -160,10 +159,11 @@ private class PsiInterpFieldRenderer : ListCellRenderer<PsiInterpField> {
         val iconsize = 64;
         val formBuilder = FormBuilder.createFormBuilder()
             .addLabeledComponent(
-                InterpGraphComponent(value.interp, iconsize, iconsize).apply {
+                    InterpGraphComponent(value.interp, iconsize, iconsize).apply {
 //                    this.stroke = 1f;
                     fontSize = 5f
-                    setWindowCenter(-0.0, -0.0, 2.1, 2.1);
+                        stroke=2f
+//                    setWindowCenter(-0.0, -0.0, 2.1, 2.1);
                     repaint()
                 },
                 JBLabel(
