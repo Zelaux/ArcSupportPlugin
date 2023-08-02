@@ -1,8 +1,7 @@
-package com.zelaux.arcplugin.support.events;
+package com.zelaux.arcplugin.events;
 
 import com.intellij.psi.PsiAnchor;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.UCallExpression;

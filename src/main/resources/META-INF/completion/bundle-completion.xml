@@ -1,21 +1,21 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.intellij">
         <usageTargetProvider
-                implementation="com.zelaux.arcplugin.support.properties.findUsages.BundlePropertiesUsageTargetProvider"/>
+                implementation="com.zelaux.arcplugin.properties.findUsages.BundlePropertiesUsageTargetProvider"/>
         <lang.findUsagesProvider language="Properties"
-                                 implementationClass="com.zelaux.arcplugin.support.properties.findUsages.BundlePropertiesFindUsagesProvider"/>
-        <usageTypeProvider implementation="com.zelaux.arcplugin.support.properties.findUsages.BundlePropertiesUsages"/>
+                                 implementationClass="com.zelaux.arcplugin.properties.findUsages.BundlePropertiesFindUsagesProvider"/>
+        <usageTypeProvider implementation="com.zelaux.arcplugin.properties.findUsages.BundlePropertiesUsages"/>
 
         <!--<completion.contributor
                 implementationClass="com.zelaux.arcplugin.support.properties.completion.PropCompletionContributor"
                 language="UAST"/>-->
         <completion.confidence
-                implementationClass="com.zelaux.arcplugin.support.properties.completion.ArcPropCompletionConfidence"
+                implementationClass="com.zelaux.arcplugin.properties.completion.ArcPropCompletionConfidence"
                 language="UAST"/>
         <!--<psi.referenceContributor implementation="com.zelaux.arcplugin.support.properties.completion.PropReferenceContributor"
                                   language="UAST"/>-->
         <psi.referenceContributor
                 language="UAST"
-                implementation="com.zelaux.arcplugin.support.properties.completion.PropReferenceContributor"/>
+                implementation="com.zelaux.arcplugin.properties.completion.PropReferenceContributor"/>
     </extensions>
 </idea-plugin>

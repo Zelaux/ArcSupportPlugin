@@ -1,4 +1,4 @@
-package com.zelaux.arcplugin.support.properties.findUsages;
+package com.zelaux.arcplugin.properties.findUsages;
 
 import com.intellij.psi.*;
 import com.intellij.usages.impl.rules.*;

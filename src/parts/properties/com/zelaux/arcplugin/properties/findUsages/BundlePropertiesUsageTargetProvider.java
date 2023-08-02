@@ -1,4 +1,4 @@
-package com.zelaux.arcplugin.support.properties.findUsages;
+package com.zelaux.arcplugin.properties.findUsages;
 
 import com.intellij.find.FindManager;
 import com.intellij.find.findUsages.PsiElement2UsageTargetAdapter;

@@ -3,7 +3,6 @@ package com.zelaux.arcplugin.commandParam.psi;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiFile;
 import com.zelaux.arcplugin.commandParam.ArcCommandParamFileType;
 import com.zelaux.arcplugin.commandParam.ArcCommandParamLanguage;
 import org.jetbrains.annotations.NotNull;

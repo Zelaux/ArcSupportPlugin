@@ -1,4 +1,4 @@
-package com.zelaux.arcplugin.support.properties.completion;
+package com.zelaux.arcplugin.properties.completion;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.lookup.LookupElement;

@@ -1,7 +1,6 @@
-package com.zelaux.arcplugin.support.events;
+package com.zelaux.arcplugin.events;
 
 import com.intellij.psi.*;
-import com.intellij.psi.impl.source.PsiClassReferenceType;
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
 import org.jetbrains.uast.UQualifiedReferenceExpression;

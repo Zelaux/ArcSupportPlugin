@@ -7,7 +7,6 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.zelaux.arcplugin.commandParam.parsing.ArcCommandParamsLexer;
 import com.zelaux.arcplugin.commandParam.psi.CPTypes;
-import org.apache.http.conn.ConnectionPoolTimeoutException;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

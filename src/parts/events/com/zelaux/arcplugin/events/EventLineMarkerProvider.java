@@ -1,4 +1,4 @@
-package com.zelaux.arcplugin.support.events;
+package com.zelaux.arcplugin.events;
 
 
 import arc.Events;

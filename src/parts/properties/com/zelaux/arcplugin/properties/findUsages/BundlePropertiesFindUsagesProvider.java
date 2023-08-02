@@ -1,4 +1,4 @@
-package com.zelaux.arcplugin.support.properties.findUsages;
+package com.zelaux.arcplugin.properties.findUsages;
 
 import com.intellij.lang.*;
 import com.intellij.lang.cacheBuilder.*;

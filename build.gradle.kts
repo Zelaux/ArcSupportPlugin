@@ -1,3 +1,4 @@
+import com.google.common.io.Files
 import org.gradle.api.internal.file.copy.DefaultCopySpec
 import org.gradle.internal.FileUtils
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -93,10 +94,10 @@ sourceSets {
     main {
         java {
 
-            (srcDirs+setOf(file("src/main/gen"))).let{
+            file("src/parts").listFiles()?.toMutableList().let{it?: mutableListOf() }.also {
+                it.add(file("src/main/gen"))
+                it+=srcDirs;
                 java.srcDirs(it)
-                println(it)
-//                srcDirs.addAll(it)
             }
             println(srcDirs)
         }
