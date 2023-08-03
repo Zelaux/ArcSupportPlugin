@@ -29,6 +29,7 @@
         <extensionPoint name="expressionParserSequenceProvider" interface="com.zelaux.arcplugin.marker.ExpParserSeqProvider" dynamic="true"/>
     </extensionPoints>
 
+    <xi:include href="/META-INF/events.xml"  xpointer="xpointer(/idea-plugin/*)"/>
     <xi:include href="/META-INF/color.xml"  xpointer="xpointer(/idea-plugin/*)"/>
     <xi:include href="/META-INF/arc-collections.xml"  xpointer="xpointer(/idea-plugin/*)"/>
     <xi:include href="/META-INF/plugin_extensions_points.xml"  xpointer="xpointer(/idea-plugin/*)"/>

@@ -1,0 +1,9 @@
+<idea-plugin>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity
+                implementation="com.zelaux.arcplugin.events.activities.poststatrup.EventIndexingPostStartupActivity"/>
+        <codeInsight.lineMarkerProvider language="UAST"
+                                        implementationClass="com.zelaux.arcplugin.events.EventLineMarkerProvider"/>
+    </extensions>
+</idea-plugin>

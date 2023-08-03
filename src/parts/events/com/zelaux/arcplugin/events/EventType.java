@@ -1,6 +1,7 @@
 package com.zelaux.arcplugin.events;
 
 import com.intellij.psi.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
 import org.jetbrains.uast.UQualifiedReferenceExpression;
@@ -34,9 +35,9 @@ public class EventType {
     }
 
     public static class SimpleType extends EventType {
-        PsiType psiType;
+        @NotNull PsiType psiType;
 
-        public SimpleType(PsiType psiType) {
+        public SimpleType(@NotNull PsiType psiType) {
             this.psiType = psiType;
         }
 
@@ -53,6 +54,7 @@ public class EventType {
             if (expressionType instanceof PsiClassType) {
                 return new SimpleType(((PsiClassType) expressionType).rawType());
             }
+            if(expressionType==null)return nothing;
             return new SimpleType(expressionType);
 
 
@@ -79,6 +81,10 @@ public class EventType {
             return Objects.equals(unwrap(psiType).getCanonicalText(), unwrap(that.psiType).getCanonicalText());
         }
 
+        @Override
+        public int hashCode() {
+            return Objects.hash(unwrap(psiType).getCanonicalText());
+        }
     }
 
     public static class EnumType extends EventType {
@@ -121,6 +127,11 @@ public class EventType {
                         ;
             }
             return false;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(enumClass.getQualifiedName(), enumConstant);
         }
     }
 
