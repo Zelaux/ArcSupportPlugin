@@ -11,7 +11,6 @@ import com.intellij.ui.tabs.*;
 import com.intellij.ui.tabs.impl.*;
 import com.intellij.util.ui.*;
 import com.zelaux.arcplugin.actions.*;
-import com.zelaux.arcplugin.parsers.*;
 import org.jetbrains.annotations.*;
 
 import javax.swing.*;

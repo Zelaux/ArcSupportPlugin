@@ -1,3 +1,4 @@
+/*
 package com.zelaux.arcplugin.marker.color;
 
 
@@ -284,7 +285,8 @@ public class ArcDrawColorProvider implements ElementColorViewerProvider{
         colorInt, colorFloat3, colorFloat4, color_Color, colorl, colorlAlpha, color_Color_Color_float, color_Color_float,
     }
 
-    /*private static class ColorResult{
+    */
+/*private static class ColorResult{
         @Nullable
         private Color color;
         @Nullable
@@ -328,5 +330,6 @@ public class ArcDrawColorProvider implements ElementColorViewerProvider{
         public boolean isNotNull(){
             return color != null;
         }
-    }*/
-}
+    }*//*
+
+}*/

@@ -10,19 +10,22 @@
         <postStartupActivity implementation="com.zelaux.arcplugin.activities.CustomNodeRendererSettingsSetup"/>
 
 
-        <codeInsight.lineMarkerProvider language="UAST" implementationClass="com.zelaux.arcplugin.marker.color.CustomColorLineMarkerProvider"/>
+<!--        <codeInsight.lineMarkerProvider language="UAST" implementationClass="com.zelaux.arcplugin.marker.color.CustomColorLineMarkerProvider"/>-->
         <codeInsight.lineMarkerProvider language="UAST" implementationClass="com.zelaux.arcplugin.marker.colorexp.ExpressionSequenceParserLineMarkerProvider"/>
 
 
     </extensions>
 
     <extensions defaultExtensionNs="com.zelaux.arcplugin">
-        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.colorexp.ArcDrawColorExpProvider"/>
+<!--        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.colorexp.ArcDrawColorExpProvider"/>-->
         <!--suppress PluginXmlValidity -->
-        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.colorexp.ArcColorExpressionProvider"/>
+<!--        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.colorexp.ArcColorExpressionProvider"/>-->
         <!--suppress PluginXmlValidity -->
-        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.colorexp.FieldAccessColorExpProvider"/>
+<!--        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.colorexp.FieldAccessColorExpProvider"/>-->
         <!--suppress PluginXmlValidity -->
-        <expressionParserSequenceProvider implementation="com.zelaux.arcplugin.marker.interp.InterpParserProvider"/>
+        <expressionParserSequenceProvider
+                implementation="com.zelaux.arcplugin.colorExpression.ColorExpressionLineMarkerProvider"/>
+        <expressionParserSequenceProvider
+                implementation="com.zelaux.arcplugin.interp.InterpExpressionProvider"/>
     </extensions>
 </idea-plugin>

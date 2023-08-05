@@ -1,3 +1,4 @@
+/*
 package com.zelaux.arcplugin
 
 import com.intellij.psi.*
@@ -44,8 +45,11 @@ object ArcColorUtils {
                 }
                 null
             }
-            /**/
+            */
+/**//*
+
         }
         return null
     }
 }
+*/

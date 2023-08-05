@@ -9,14 +9,6 @@ import org.jetbrains.uast.evaluation.uValueOf
 
 //region get
 
-fun getInt(expr: UExpression): Int {
-    return (getObject(expr) as? Int) ?: throw WrongExpressionTypeException
-}
-
-fun getFloat(expr: UExpression): Float {
-    val `object` = getObject(expr) ?: throw WrongExpressionTypeException
-    return (`object` as Number).toFloat()
-}
 
 
 fun getInt(expr: PsiExpression): Int {
@@ -33,11 +25,6 @@ fun getObject(expr: PsiExpression): Any? {
     return JavaConstantExpressionEvaluator.computeConstantExpression(expr, true)
 }
 
-fun getObject(expr: UExpression): Any? {
-    val value = expr.uValueOf() ?: return null
-    val constant = value.toConstant() ?: return null
-    return constant.value
-}
 //endregion
 
 //region replace

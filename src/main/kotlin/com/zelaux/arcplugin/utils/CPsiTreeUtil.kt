@@ -14,7 +14,6 @@ import java.util.stream.Collectors
 
 fun PsiElement.resolveRecursiveField(): PsiField? {
     return tryResolve()
-
 }
 
 private fun PsiElement.tryResolve(): PsiField? {
@@ -36,7 +35,8 @@ private fun PsiElement.tryResolve(): PsiField? {
     if (resolve !is ClsFieldImpl) return null
     val parent = resolve.getParent() as ClsClassImpl
     val sourceMirrorClass = parent.sourceMirrorClass?:return null
-    val collect = Arrays.stream(sourceMirrorClass.allFields).filter { it: PsiField -> it.name == resolve.name }.collect(Collectors.toList())
+    val collect = Arrays.stream(sourceMirrorClass.allFields)
+            .filter { it: PsiField -> it.name == resolve.name }.collect(Collectors.toList())
     if (collect.size == 1 && collect[0].hasInitializer()) return collect[0]
     return null
 }

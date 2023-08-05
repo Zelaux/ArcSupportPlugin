@@ -9,6 +9,7 @@ import com.intellij.psi.impl.*;
 import com.zelaux.arcplugin.*;
 import com.zelaux.arcplugin.colorViewer.*;
 import com.zelaux.arcplugin.marker.result.*;
+import com.zelaux.arcplugin.psi.PrimitiveType;
 import com.zelaux.arcplugin.utils.*;
 import kotlin.jvm.functions.*;
 import org.jetbrains.annotations.*;
@@ -187,7 +188,7 @@ valueOf(String)
 //                System.out.println(canonicalText);
                 if("set".equals(methodName) && canonicalText.equals(MetaData.Color.PATH)) return ColorConstructors.setColor;
                 if(canonicalText.equals("java.lang.String")) return ColorConstructors.valueOf_Str;
-                if (PsiType.INT.equals(paramType.get(0))) return ColorConstructors.constructorInt;
+                if (PrimitiveType.INT.isEqual(paramType.get(0))) return ColorConstructors.constructorInt;
             return null;
             case 2:
                 return ColorConstructors.valueOf_Color_Str;
@@ -196,7 +197,8 @@ valueOf(String)
                 return ColorConstructors.constructorFloat3;
             case 4:
                 if(MetaData.Color.HSVtoRGB.equals(methodName))
-                    return Objects.equals(paramType.get(paramType.size() - 1), PsiType.FLOAT) ? ColorConstructors.hsvToRgb_flt4 : ColorConstructors.hsvToRgb_flt3_Color;
+
+                    return PrimitiveType.FLOAT.isEqual(paramType.get(paramType.size() - 1)) ? ColorConstructors.hsvToRgb_flt4 : ColorConstructors.hsvToRgb_flt3_Color;
                 return ColorConstructors.constructorFloat4;
         }
 

@@ -1,3 +1,4 @@
+/*
 package com.zelaux.arcplugin.marker.colorexp;
 
 import com.intellij.java.*;
@@ -8,16 +9,14 @@ import com.zelaux.arcplugin.*;
 import com.zelaux.arcplugin.MetaData.*;
 import com.zelaux.arcplugin.awt.*;
 import com.zelaux.arcplugin.marker.*;
-import com.zelaux.arcplugin.parsers.colorexpr.*;
-import com.zelaux.arcplugin.parsers.colorexpr.ComponentSetter.Companion.*;
+import com.zelaux.arcplugin.parsers.colorexpr.ColorExpParserSequence;
+import com.zelaux.arcplugin.psi.PrimitiveType;
 import com.zelaux.arcplugin.utils.*;
 import org.jetbrains.annotations.*;
 import org.jetbrains.uast.*;
 
 import java.awt.Color;
-import java.util.*;
 import java.util.List;
-import java.util.stream.*;
 
 import static com.zelaux.arcplugin.utils.PsiExpressionUtilsKt.*;
 
@@ -28,13 +27,14 @@ public class ArcDrawColorExpProvider implements ExpParserSeqProvider{
         String[] availableMethods = {MetaData.Draw.color, MetaData.Draw.colorl, MetaData.Draw.mixcol};
         for(String availableMethod : availableMethods){
             if(UExpressionUtils.isStaticMethod(expression, MetaData.Draw.PATH, availableMethod)){
-                return getColorInternal(expression, element);
+//                return getColorInternal(expression, element);
             }
         }
         return null;
     }
 
-    private static ColorExpParserSequence getColorInternal(UCallExpression newExpression, @NotNull PsiCallExpression callExpression){
+    */
+/*private static ColorExpParserSequence getColorInternal(UCallExpression newExpression, @NotNull PsiCallExpression callExpression){
         java.util.List<UExpression> args = newExpression.getValueArguments();
         java.util.List<PsiType> typeArgs = args.stream().map(UExpression::getExpressionType).collect(Collectors.toList());
         try{
@@ -83,7 +83,8 @@ public class ArcDrawColorExpProvider implements ExpParserSeqProvider{
 //            ignore.printStackTrace();
         }
         return null;
-    }
+    }*//*
+
 
 
     private static DrawFunctionType drawFunctionType(String methodName, int paramCount, java.util.List<PsiType> paramType){
@@ -97,7 +98,7 @@ public class ArcDrawColorExpProvider implements ExpParserSeqProvider{
                 return null;
             case 1:
                 if(isColorlMethod) return DrawFunctionType.colorl;
-                if(Objects.equals(paramType.get(0), PsiType.INT)) return DrawFunctionType.colorInt;
+                if(PrimitiveType.INT.isEqual(paramType.get(0))) return DrawFunctionType.colorInt;
                 return DrawFunctionType.color_Color;
             case 2:{
                 if(isColorlMethod) return DrawFunctionType.colorlAlpha;
@@ -107,7 +108,7 @@ public class ArcDrawColorExpProvider implements ExpParserSeqProvider{
             case 3:{
                 if(isColorMethod || isMixcolMethod){
                     if(paramType.get(0).getCanonicalText().equals(MetaData.Color.PATH) &&
-                    paramType.get(1).getCanonicalText().equals(MetaData.Color.PATH)
+                            paramType.get(1).getCanonicalText().equals(MetaData.Color.PATH)
                     ) return DrawFunctionType.color_Color_Color_float;
                     if(isColorMethod) return DrawFunctionType.colorFloat3;
                 }
@@ -210,7 +211,7 @@ public class ArcDrawColorExpProvider implements ExpParserSeqProvider{
         };
 
         CommandProcessor.getInstance()
-        .executeCommand(element.getProject(), command, JavaBundle.message("change.color.command.text"), null, document);
+                .executeCommand(element.getProject(), command, JavaBundle.message("change.color.command.text"), null, document);
     }
 
 
@@ -219,4 +220,4 @@ public class ArcDrawColorExpProvider implements ExpParserSeqProvider{
         colorInt, colorFloat3, colorFloat4, color_Color, colorl, colorlAlpha, color_Color_Color_float, color_Color_float,
     }
 
-}
+}*/

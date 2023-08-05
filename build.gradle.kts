@@ -1,6 +1,3 @@
-import com.google.common.io.Files
-import org.gradle.api.internal.file.copy.DefaultCopySpec
-import org.gradle.internal.FileUtils
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -29,7 +26,18 @@ intellij {
     type.set("IC") // Target IDE Platform
 
 //    plugins.set(listOf(/* Plugin Dependencies */))
-    plugins.set(listOf("java", "properties", /*"DevKit",*/"org.intellij.intelliLang"))
+    plugins.set(listOf(
+            "java",
+//            "org.jetbrains.kotlin:222-1.8.21-release-380-IJ4167.29",
+            "Kotlin",//////
+//            "org.intellij.scala:2022.2.19",//////
+//            "Groovy",//////
+
+            "properties",//////
+            /*"DevKit",*/
+            "org.intellij.intelliLang",//////
+
+            ))
 }
 sourceSets {
     main {
@@ -90,16 +98,23 @@ compileKotlin.kotlinOptions {
     languageVersion = "1.7"
 }
 // Generated content
-sourceSets {
-    main {
-        java {
 
-            file("src/parts").listFiles()?.toMutableList().let{it?: mutableListOf() }.also {
-                it.add(file("src/main/gen"))
-                it+=srcDirs;
-                java.srcDirs(it)
+
+file("src/parts").listFiles()?.toMutableList().let { it ?: mutableListOf() }.also { newDirs ->
+    newDirs.add(file("src/main/gen"))
+
+
+    sourceSets {
+        main {
+            java {
+                newDirs += srcDirs
+                java.srcDirs(newDirs)
             }
-            println(srcDirs)
+        }
+    }
+    kotlin {
+        sourceSets.main {
+            kotlin.srcDirs(newDirs)
         }
     }
 }

@@ -1,0 +1,7 @@
+<idea-plugin>
+
+
+    <extensions defaultExtensionNs="com.zelaux.arcplugin">
+        <languageInfo language="kotlin" implementationClass="com.zelaux.arcplugin.langinfo.impl.KotlinLanguageInfo"/>
+    </extensions>
+</idea-plugin>

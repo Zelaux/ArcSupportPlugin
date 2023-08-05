@@ -12,7 +12,8 @@ private inline fun <reified T : Int> LocalAlphaBackgroundImage(imageWidth: T, im
 
 @Suppress("FINAL_UPPER_BOUND")
 private inline fun <reified T : AlphaBackgroundImage> T.sameValues(width: Int, height: Int): Boolean = sameValues(width, height, Color.LIGHT_GRAY, Color.GRAY, 6)
-class ColorComponent(
+
+open class ColorComponent @JvmOverloads constructor(
     color: Color,
 
     @get:JvmName("getPreferredSize1") @set:JvmName("setPreferredSize1")

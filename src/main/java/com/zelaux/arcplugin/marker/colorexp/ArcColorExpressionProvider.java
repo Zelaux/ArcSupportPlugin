@@ -1,8 +1,9 @@
+/*
 package com.zelaux.arcplugin.marker.colorexp;
 
 import com.intellij.psi.*;
 import com.zelaux.arcplugin.marker.*;
-import com.zelaux.arcplugin.parsers.colorexpr.*;
+import com.zelaux.arcplugin.parsers.colorexpr.ColorExpParserSequence;
 import org.jetbrains.annotations.*;
 
 public class ArcColorExpressionProvider implements ExpParserSeqProvider{
@@ -15,6 +16,8 @@ public class ArcColorExpressionProvider implements ExpParserSeqProvider{
         PsiElement referenceExpression = identifier.getParent();
         if(!(referenceExpression.getParent() instanceof PsiCallExpression)) return null;
 
-        return SmartColorResolver.resolveColor((PsiCallExpression)referenceExpression.getParent());
+        return null;
+//        return SmartColorResolver.resolveColor((PsiCallExpression)referenceExpression.getParent());
     }
 }
+*/

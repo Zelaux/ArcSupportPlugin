@@ -161,7 +161,7 @@ open class GradientComponent(var colorA: Color, var colorB: Color, var drawKnob:
         //endregion
     }
 
-    protected open fun knobColor(image: Image, knobX: Int, g: Graphics) {
+    protected open fun knobColor(image: Image?, knobX: Int, g: Graphics) {
         if (colorA == colorB) {
             g.color = if (ColorUtil.isDark(colorA)) Color.WHITE else Color.BLACK
         } else if (image is ToolkitImage && image.bufferedImage.width > knobX/* && image.bufferedImage.height > knobY*/) {
