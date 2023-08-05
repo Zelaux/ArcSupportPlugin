@@ -1,5 +1,6 @@
 package com.zelaux.arcplugin.expressions.render.exp;
 
+import arc.graphics.Color;
 import arc.util.Tmp;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
@@ -28,28 +29,33 @@ public class NoParamFuncitonExpressionRenderer extends ArcColorExpressionRendere
     public JPanelBuilder getTabComponent(Project project, Ref<LightCalloutPopup> popupRef, Ref<ArcColorExpressionRenderSettings> param) {
         JPanelBuilder builder = new JPanelBuilder(false);
         ArcColorExpressionSequence sequence = param.get().sequence();
-        sequence.applyColorUntil(self, Tmp.c1.set(0xff));
+        Color tmpColor = ColorUtils.obtainColor();
+        sequence.applyColorUntil(self, tmpColor.set(0xff));
 
-        sequence.applyColorUntil(self, Tmp.c1.set(0xff));
+        sequence.applyColorUntil(self, tmpColor.set(0xff));
         Dimension sliderSize = param.get().calculateSliderSize();
         Dimension preferredSize = new Dimension(sliderSize.width / 3, sliderSize.height);
 
-        ColorComponent originalComp = new ColorComponent(ColorUtils.toAwt(Tmp.c1),
+        ColorComponent originalComp = new ColorComponent(ColorUtils.toAwt(tmpColor),
                 preferredSize,
                 preferredSize
         );
-        self.apply(Tmp.c1);
-        ColorComponent newComp = new ColorComponent(ColorUtils.toAwt(Tmp.c1),
+        self.apply(tmpColor);
+        ColorComponent newComp = new ColorComponent(ColorUtils.toAwt(tmpColor),
                 preferredSize,
                 preferredSize);
+
+        ColorUtils.freeColors(tmpColor);
+
+
         builder.addComponent(originalComp)
                 .addComponent(new IconComponent(AllIcons.Diff.ArrowRight))
                 .addComponent(newComp);
         param.get().registerListener(self, () -> {
-            sequence.applyColorUntil(self, Tmp.c1.set(0xff));
-            originalComp.setColor(ColorUtils.toAwt(Tmp.c1));
-            self.apply(Tmp.c1);
-            newComp.setColor(ColorUtils.toAwt(Tmp.c1));
+            sequence.applyColorUntil(self, tmpColor.set(0xff));
+            originalComp.setColor(ColorUtils.toAwt(tmpColor));
+            self.apply(tmpColor);
+            newComp.setColor(ColorUtils.toAwt(tmpColor));
         });
 //        addComponent(IconAllIcons.Diff.Arrow)
         return builder;

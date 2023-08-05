@@ -43,9 +43,10 @@ public class LerpColorParserRenderer extends ArcColorExpressionRenderer {
     public JPanelBuilder getTabComponent(Project project,
                                          Ref<LightCalloutPopup> popupRef,
                                          Ref<ArcColorExpressionRenderSettings> param) {
-
-        Color initColorA = calculateColorA(param);
-        Color initColorB = calculateColorB();
+        arc.graphics.Color tmpColor = ColorUtils.colorPool.obtain();
+        Color initColorA = calculateColorA(param,tmpColor);
+        Color initColorB = calculateColorB(tmpColor);
+        ColorUtils.colorPool.free(tmpColor);
         Float progress = self.progress();
         boolean hasProgress = progress != null;
         JPanelBuilder builder = new JPanelBuilder();
@@ -61,8 +62,10 @@ public class LerpColorParserRenderer extends ArcColorExpressionRenderer {
             setSize(param.get().calculateSliderSize());
             if (hasProgress) setProgressColorValue(progress);
             param.get().registerListener(self, () -> {
-                setColorA(calculateColorA(param));
-                setColorB(calculateColorB());
+                arc.graphics.Color tmpColor2 = ColorUtils.obtainColor();
+                setColorA(calculateColorA(param,tmpColor2));
+                setColorB(calculateColorB(tmpColor2));
+                ColorUtils.freeColors(tmpColor2);
             });
             if (hasProgress) {
                 addProgressListener(newProgress -> {
@@ -75,19 +78,19 @@ public class LerpColorParserRenderer extends ArcColorExpressionRenderer {
     }
 
     @NotNull
-    private Color calculateColorB() {
+    protected Color calculateColorB(arc.graphics.Color tmpColor) {
         ArcColorExpression secondExp = self.secondColor.get();
-        secondExp.apply(Tmp.c1);
-        return ColorUtils.toAwt(Tmp.c1);
+        secondExp.apply(tmpColor);
+        return ColorUtils.toAwt(tmpColor);
     }
 
     @NotNull
-    private Color calculateColorA(Ref<ArcColorExpressionRenderSettings> param) {
-        param.get().sequence().applyColorUntil(self, Tmp.c1.set(0xff));
+    protected Color calculateColorA(Ref<ArcColorExpressionRenderSettings> param, arc.graphics.Color tmpColor) {
+        param.get().sequence().applyColorUntil(self, tmpColor.set(0xff));
         ArcColorExpression innerExp = self.innerColor.get();
         if (innerExp != null) {
-            innerExp.apply(Tmp.c1);
+            innerExp.apply(tmpColor);
         }
-        return ColorUtils.toAwt(Tmp.c1);
+        return ColorUtils.toAwt(tmpColor);
     }
 }

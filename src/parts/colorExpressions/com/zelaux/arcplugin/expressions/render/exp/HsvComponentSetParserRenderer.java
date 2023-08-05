@@ -83,14 +83,17 @@ public class HsvComponentSetParserRenderer extends ArcColorExpressionRenderer {
     @SuppressWarnings("DuplicatedCode")
     @NotNull
     protected Result calculateColor(Ref<ArcColorExpressionRenderSettings> param) {
-        Color tmpC = Tmp.c1;
+        Color tmpC = ColorUtils.obtainColor();
+        Color tmpC2 = ColorUtils.obtainColor();
+
         param.get().sequence.applyColorUntil(self, tmpC.set(0xff));
-        Color tmpC2 = Tmp.c2;
         self.component.set(tmpC2.set(tmpC), 0f);
         java.awt.Color firstColor = ColorUtils.toAwt(tmpC2);
         self.component.set(tmpC2.set(tmpC), self.component.maxValue);
         java.awt.Color secondColor = ColorUtils.toAwt(tmpC2);
         Result result = new Result(firstColor, secondColor);
+
+        ColorUtils.freeColors(tmpC,tmpC2);
         return result;
     }
 

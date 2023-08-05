@@ -51,7 +51,7 @@ public class CustomUastTreeUtil {
         UField resolveField = (UField) resolve;
 
         PsiElement sourcePsi = resolve.getSourcePsi();
-        if (!(sourcePsi instanceof ClsFieldImpl)) return null;
+        if (!(sourcePsi instanceof ClsFieldImpl)) return resolveField;
 
         ClsClassImpl parent = (ClsClassImpl) sourcePsi.getParent();
         PsiClass sourceMirrorClass = parent.getSourceMirrorClass();

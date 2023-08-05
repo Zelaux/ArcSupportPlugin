@@ -79,19 +79,23 @@ public class ShiftHsvExpressionRenderer extends ArcColorExpressionRenderer {
 
     @NotNull
     protected Result calculateColor(Ref<ArcColorExpressionRenderSettings> param) {
-        Color tmpC = Tmp.c1;
+        Color tmpC = ColorUtils.obtainColor();
+        Color tmpC2 = ColorUtils.obtainColor();
+
+
         float inputValue = getInputValue(param);
-        Color tmpC2 = Tmp.c2;
         self.component.set(tmpC2.set(tmpC), 0f);
         java.awt.Color firstColor = ColorUtils.toAwt(tmpC2);
         self.component.set(tmpC2.set(tmpC), self.component.maxValue);
         java.awt.Color secondColor = ColorUtils.toAwt(tmpC2);
         Result result = new Result(inputValue, firstColor, secondColor);
+
+        ColorUtils.freeColors(tmpC,tmpC2);
         return result;
     }
 
     protected float getInputValue(Ref<ArcColorExpressionRenderSettings> param) {
-        Color tmpC = Tmp.c1;
+        Color tmpC = ColorUtils.obtainColor();
         param.get().sequence.applyColorUntil(self, tmpC.set(0xff));
         return self.component.get(tmpC);
     }

@@ -15,7 +15,7 @@ object lerp : ColorRegister() {
             init{
                 parameterOffset=3;
             }
-            override fun getStaticSetColorParser(index: Int): ArcColorExpression {
+            override fun getStaticSetColorParser(index: Int): ArcColorExpression? {
                 if(index==0){
                     return object: SetFloatsExpression(castElement(),"",true){
                         override fun invalidateUElement() {

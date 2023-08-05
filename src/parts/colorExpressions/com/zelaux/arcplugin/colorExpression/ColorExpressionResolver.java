@@ -111,7 +111,7 @@ public class ColorExpressionResolver {
         UMethod containing = UastUtils.findContaining(method.resolve(), UMethod.class);
         if (containing == null) return null;
         UClass clazz = CustomUastTreeUtil.getContainingClass(containing);
-        if (clazz == null || !Objects.equals(clazz.getQualifiedName(), MetaData.Color.PATH)) {
+        if (clazz == null) {
             return null;
         }
         String name = method.getMethodName();

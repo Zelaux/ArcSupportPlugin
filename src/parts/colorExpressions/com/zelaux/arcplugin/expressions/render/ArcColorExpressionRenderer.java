@@ -1,5 +1,7 @@
 package com.zelaux.arcplugin.expressions.render;
 
+import arc.util.pooling.Pool;
+import arc.util.pooling.Pools;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.ui.colorpicker.LightCalloutPopup;
@@ -14,11 +16,14 @@ import com.zelaux.arcplugin.utils.ColorUtils;
 import java.awt.*;
 
 public abstract class ArcColorExpressionRenderer implements ExpressionRenderer<ArcColorExpressionSequence, ArcColorExpressionRenderSettings> , ArcImportableColorExpressionRenderer {
-    private static final arc.graphics.Color tmpColor1 = new arc.graphics.Color();
+
 
     protected <T extends ArcColorExpression & Expression.ExpressionEntryPoint> Color awtColorAt(T expression) {
-        expression.apply(tmpColor1);
-        return ColorUtils.toAwt(tmpColor1);
+        arc.graphics.Color color = ColorUtils.colorPool.obtain();
+        expression.apply(color);
+        Color awt = ColorUtils.toAwt(color);
+        ColorUtils.colorPool.free(color);
+        return awt;
     }
 
     @Override

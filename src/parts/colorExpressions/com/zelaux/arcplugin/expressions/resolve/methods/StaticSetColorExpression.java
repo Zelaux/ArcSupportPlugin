@@ -16,7 +16,7 @@ import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.UExpression;
 
 public class StaticSetColorExpression extends ArcColorExpression implements Expression.ExpressionEntryPoint {
-    private static final Color myTmpColor = new Color();
+    private final Color myTmpColor = new Color();
     public final Func<UElement, UExpression> mapper;
     public final LazyValue<@Nullable Color> myColor = LazyValue.create(() -> {
         UExpression target = getTargetExpression();

@@ -1,5 +1,6 @@
 package com.zelaux.arcplugin;
 
+import arc.graphics.g2d.Lines;
 import arc.util.*;
 import org.jetbrains.annotations.*;
 
@@ -24,5 +25,9 @@ public class MetaData{
         public static final String color = "color";
         public static final String colorl = "colorl";
         public static final String mixcol = "mixcol";
+    }
+
+    public static class Lines {
+        public static final String PATH = arc.graphics.g2d.Lines.class.getCanonicalName();
     }
 }

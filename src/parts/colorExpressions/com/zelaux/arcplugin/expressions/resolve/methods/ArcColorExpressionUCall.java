@@ -32,6 +32,7 @@ public abstract class ArcColorExpressionUCall extends ArcColorExpression {
         super(uElement, UCallExpression.class, tabTitle);
     }
 
+    @SuppressWarnings("unchecked")
     public <T> T getParam(ParameterType<T> type, int index) {
         if (tmpValues.containsKey(index)) {
             return (T) tmpValues.get(index);

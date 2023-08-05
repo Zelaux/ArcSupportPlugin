@@ -3,6 +3,7 @@ package com.zelaux.arcplugin.colorExpression
 import arc.struct.IntMap
 import arc.struct.ObjectMap
 import arc.struct.Seq
+import com.zelaux.arcplugin.colorExpression.drawmethods.DrawRegister
 import com.zelaux.arcplugin.colorExpression.methods.*
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpression
 import com.zelaux.arcplugin.psi.PrimitiveType
@@ -58,6 +59,7 @@ object ColorExpressionParserMap {
 
     init {
         ColorRegister.register();
+        DrawRegister.register();
 
     }
 
@@ -75,7 +77,7 @@ object ColorExpressionParserMap {
         val argumentList = expression.valueArguments
         val value = nameMap[methodName] ?: return null
         val pairs = value[argumentList.size] ?: return null
-        val mappedTypes = expression.typeArguments.map { it.canonicalText }.toTypedArray()
+        val mappedTypes = expression.valueArguments.map { it.getExpressionType()?.canonicalText }.toTypedArray().takeIf { !it.contains(null) }?:return null;
 
         val (_, constructor) = pairs.find { it.first.contentEquals(mappedTypes) } ?: run {
             val typedArray = expression.resolve()?.parameterList?.parameters?.map { it.type.canonicalText }?.toTypedArray()
