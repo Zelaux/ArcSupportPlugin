@@ -5,6 +5,7 @@ import com.intellij.codeInsight.daemon.impl.analysis.JavaGenericsUtil
 import com.intellij.codeInspection.*
 import com.intellij.psi.*
 import com.intellij.uast.*
+import com.zelaux.arcplugin.psi.PrimitiveType
 import com.zelaux.arcplugin.utils.*
 import com.zelaux.arcplugin.utils.PsiUtils.isType
 import org.jetbrains.uast.*
@@ -78,7 +79,7 @@ class StaticMethodsInspection : AbstractBaseUastLocalInspectionTool() {
                     for (datum in strategy.classes) {
 
                         for (type in allTypes) {
-                            if (isType(datum.name, type) || !datum.isPrimitive && i % descriptor.parameterStrategies.size != 0 && type === PsiType.NULL) {
+                            if (isType(datum.name, type) || !datum.isPrimitive && i % descriptor.parameterStrategies.size != 0 && PrimitiveType.NULL.isEqual(type)) {
                                 valid = true
                                 break
                             }

@@ -3,6 +3,7 @@ package com.zelaux.arcplugin.utils
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiType
 import com.intellij.psi.util.PsiTypesUtil
+import com.zelaux.arcplugin.psi.PrimitiveType
 import org.jetbrains.uast.UExpression
 
 object PsiUtils {
@@ -20,7 +21,8 @@ object PsiUtils {
         val fqn = aClass.qualifiedName
         return classPath == fqn
     }
-@JvmStatic
+
+    @JvmStatic
     fun isType(classPath: String, expression: UExpression?): Boolean {
         if (expression == null) return false
         val sourcePsi = expression.sourcePsi
@@ -30,5 +32,10 @@ object PsiUtils {
             if (isType(classPath, resolve)) return true
         }
         return false
+    }
+
+    @JvmStatic
+    fun isType(type: PsiType?, kind: PrimitiveType): Boolean {
+        return (type?.canonicalText ?: return false) == kind.name
     }
 }

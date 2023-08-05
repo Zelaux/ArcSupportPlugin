@@ -10,6 +10,7 @@ import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.psi.impl.source.resolve.reference.impl.JavaReflectionReferenceUtil;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.zelaux.arcplugin.psi.PrimitiveType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,7 +39,7 @@ public class ArcReflectionReferenceUtil {
             return false;
         }
         final PsiType type = field.getType();
-        return !(type instanceof PsiPrimitiveType) || PsiType.INT.equals(type) || PsiType.LONG.equals(type);
+        return !(type instanceof PsiPrimitiveType) || PrimitiveType.INT.isEqual(type) || PrimitiveType.LONG.isEqual(type);
     }
 
     @Nullable
