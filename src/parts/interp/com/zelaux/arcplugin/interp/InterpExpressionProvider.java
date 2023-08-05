@@ -29,7 +29,7 @@ public class InterpExpressionProvider implements ExpressionSequenceProvider {
             PsiLambdaExpressionType type = (PsiLambdaExpressionType) expressionType;
             PsiType interfaceType = type.getExpression().getFunctionalInterfaceType();
             if (!isInterpType(interfaceType)) return null;
-        } else if (!expressionType.getCanonicalText().equals(Interp.class.getCanonicalName())) {
+        } else if (!isInterpType(expressionType)) {
             return null;
         }
         if (expression instanceof ULambdaExpression) {
@@ -43,7 +43,7 @@ public class InterpExpressionProvider implements ExpressionSequenceProvider {
         } else {
             UElement uastParent = identifier.getUastParent();
             if (uastParent == null) return null;
-            if (uastParent.getUastParent() != expression) {
+            if (uastParent.getSourcePsi()!=expression.getSourcePsi()) {
                 return null;
             }
         }
