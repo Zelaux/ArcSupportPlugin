@@ -11,6 +11,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.psi.util.CachedValue;
+import com.intellij.util.Alarm;
 import com.intellij.util.concurrency.AppExecutorUtil;
 import com.zelaux.arcplugin.events.activities.EventIndexingManager;
 import com.zelaux.arcplugin.utils.CheckedDisposable;
@@ -58,7 +59,7 @@ public class EventIndexingPostStartupActivity implements StartupActivity {
             this.project = project;
             disposables = new ValueData[arr.length];
             for (int i = 0; i < disposables.length; i++) {
-                disposables[i] = new ValueData();
+                disposables[i] = new ValueData(project,arr[i]);
             }
         }
 
@@ -80,17 +81,35 @@ public class EventIndexingPostStartupActivity implements StartupActivity {
                     }
                     disposable.register(parent);
                     valueData.dependencies= cachedValue.currentValidTimeStamps();
-                    DumbService instance = DumbService.getInstance(project);
-                    BackgroundTaskUtil.submitTask(disposable, ()->{
-                        instance.runReadActionInSmartMode(()->cachedValue.getValue(disposable));
-                    });
+                    valueData.postAlarm();
                 }
             }
         }
 
-      static   class ValueData {
-            long[] dependencies = null;
+      static   class ValueData implements Runnable {
+            public final Project project;
+            public final    MyParameterizedCachedValue<?, CheckedDisposable> cachedValue;
+
+          public ValueData(Project project, MyParameterizedCachedValue<?, CheckedDisposable> cachedValue) {
+              this.project = project;
+              this.cachedValue = cachedValue;
+          }
+
+          long[] dependencies = null;
+            Alarm myAlarm=new Alarm();
+            void postAlarm(){
+                myAlarm.cancelAllRequests();
+                myAlarm.addRequest(this,1_000);
+            }
             final CheckedDisposable disposable=new CheckedDisposable();
-        }
+
+          @Override
+          public void run() {
+              DumbService instance = DumbService.getInstance(project);
+              BackgroundTaskUtil.submitTask(disposable, ()->{
+                  instance.runReadActionInSmartMode(()->cachedValue.getValue(disposable));
+              });
+          }
+      }
     }
 }
