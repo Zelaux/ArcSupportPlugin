@@ -6,7 +6,6 @@ import com.zelaux.arcplugin.expressions.resolve.methods.SetHsvColorExpression
 import com.zelaux.arcplugin.expressions.resolve.methods.ShiftHsvExpression
 import com.zelaux.arcplugin.expressions.resolve.methods.hsv.HsvComponent
 import com.zelaux.arcplugin.psi.PrimitiveType
-import org.jetbrains.kotlin.lombok.utils.capitalize
 
 
 internal object hsv : ColorRegister() {

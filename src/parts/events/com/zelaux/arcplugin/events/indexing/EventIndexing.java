@@ -1,4 +1,4 @@
-package com.zelaux.arcplugin.events.activities;
+package com.zelaux.arcplugin.events.indexing;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiMethod;

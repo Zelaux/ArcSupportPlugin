@@ -1,6 +1,7 @@
-package com.zelaux.arcplugin.events.activities;
+package com.zelaux.arcplugin.events.indexing;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
 import com.zelaux.arcplugin.events.EventSubscription;
 import com.zelaux.arcplugin.events.EventType;
@@ -18,8 +19,9 @@ public class ListenEventIndexing implements EventIndexing<EventSubscription> {
 
     @Override
     public PsiMethod[] methods() {
-        PsiMethod[] a = EventIndexingManager.getArcEventsClass().findMethodsByName("on", false);
-        PsiMethod[] b = EventIndexingManager.getArcEventsClass().findMethodsByName("run", false);
+        PsiClass aClass = EventIndexingManager.getArcEventsClass();
+        PsiMethod[] a = aClass.findMethodsByName("on", false);
+        PsiMethod[] b = aClass.findMethodsByName("run", false);
 
         if (methods == null || methods.length != a.length + b.length) methods = new PsiMethod[a.length + b.length];
         System.arraycopy(a, 0, methods, 0, a.length);

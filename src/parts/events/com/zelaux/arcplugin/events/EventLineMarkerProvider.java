@@ -7,21 +7,15 @@ import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.ide.util.DefaultPsiElementCellRenderer;
 import com.intellij.openapi.editor.markup.GutterIconRenderer.Alignment;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.module.ModuleUtilCore;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.psi.*;
 import com.intellij.psi.presentation.java.SymbolPresentationUtil;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.InheritanceUtil;
 import com.intellij.util.SmartList;
 import com.zelaux.arcplugin.PluginIcons;
-import com.zelaux.arcplugin.events.activities.EventIndexingManager;
+import com.zelaux.arcplugin.events.indexing.EventIndexingManager;
 import kotlin.jvm.internal.Intrinsics;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.*;
 
 import java.util.Collection;
@@ -38,14 +32,14 @@ public class EventLineMarkerProvider extends RelatedItemLineMarkerProvider {
 
 
     public static Stream<FireEventPoint> getFirePoints(EventType eventType) {
-        SmartList<FireEventPoint> dynamic = EventIndexingManager.projectFirePoints.getValue(null).get(eventType);
-        SmartList<FireEventPoint> dependencies = EventIndexingManager.librariesFirePoints.getValue(null).get(eventType);
+        SmartList<FireEventPoint> dynamic = EventIndexingManager.projectFirePoints.getValue().get(eventType);
+        SmartList<FireEventPoint> dependencies = EventIndexingManager.librariesFirePoints.getValue().get(eventType);
         return combineStream(dynamic, dependencies);
     }
 
     public static Stream<EventSubscription> getEventListeners(EventType type) {
-        SmartList<EventSubscription> dynamic = EventIndexingManager.projectEventSubscription.getValue(null).get(type);
-        SmartList<EventSubscription> dependencies = EventIndexingManager.librariesEventSubscription.getValue(null).get(type);
+        SmartList<EventSubscription> dynamic = EventIndexingManager.projectEventSubscription.getValue().get(type);
+        SmartList<EventSubscription> dependencies = EventIndexingManager.librariesEventSubscription.getValue().get(type);
         return combineStream(dynamic, dependencies);
     }
 

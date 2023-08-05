@@ -1,6 +1,7 @@
-package com.zelaux.arcplugin.events.activities;
+package com.zelaux.arcplugin.events.indexing;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
 import com.zelaux.arcplugin.events.EventType;
 import com.zelaux.arcplugin.events.FireEventPoint;
@@ -10,17 +11,20 @@ public class FireEventIndexing implements EventIndexing<FireEventPoint> {
 
     PsiMethod[] methods = PsiMethod.EMPTY_ARRAY;
 
+    @Override
     public void setProject(Project project) {
-        ;
+
     }
 
     @Override
     public PsiMethod[] methods() {
-        return methods = EventIndexingManager.getArcEventsClass().findMethodsByName("fire", false);
+        PsiClass psiClass = EventIndexingManager.getArcEventsClass();
+        if (psiClass == null) return methods = PsiMethod.EMPTY_ARRAY;
+        return methods = psiClass.findMethodsByName("fire", false);
     }
 
     @Override
     public FireEventPoint construct(UExpression expression, EventType eventType) {
-        return new FireEventPoint(expression,eventType);
+        return new FireEventPoint(expression, eventType);
     }
 }
