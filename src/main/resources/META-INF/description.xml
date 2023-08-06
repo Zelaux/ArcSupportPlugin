@@ -1,12 +1,11 @@
 <idea-plugin>
-    <description><![CDATA[<h1 id="arcsupportplugin">Arc Support</h1>
+    <description><![CDATA[<h1 id="arc-support">Arc Support</h1>
+    <p><a href="https://plugins.jetbrains.com/plugin/22399-arcsupportplugin"><img src="https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg" alt="Version"></a>
+        <a href="https://plugins.jetbrains.com/plugin/22399-arcsupportplugin"><img src="https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg" alt="Downloads"></a></p>
     <h2 id="description">Description</h2>
-    <hr>
     <p>That plugin supports framework <a href="https://github.com/Anuken/Arc">Anuken/Arc</a></p>
-    <h2 id="-previews-https-github-com-zelaux-arcsupportplugin-blob-master-previews-md-"><a href="https://github.com/Zelaux/ArcSupportPlugin/blob/master/PREVIEWS.md">Previews</a></h2>
-    <hr>
+    <h2 id="-previews-previews-md-"><a href="PREVIEWS.md">Previews</a></h2>
     <h2 id="features">Features</h2>
-    <hr>
     <h4 id="debug-renderers">Debug Renderers</h4>
     <ul>
         <li><code>arc.graphics.Color</code></li>
@@ -18,6 +17,7 @@
     </ul>
     <h4 id="line-markers">Line Markers</h4>
     <ul>
+        <li>navigation for <code>arc.Events</code></li>
         <li>manipulation <code>arc.graphics.Color</code>(calculation &amp; editing color)</li>
         <li>displays buildin <code>arc.math.Interp</code> as interactive graphics</li>
     </ul>

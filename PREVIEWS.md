@@ -1,5 +1,8 @@
 # Previews
 
+### arc.Events Navigation
+![EventsPreview.gif](previews%2FEventsPreview.gif)
+
 ### Bundle Preview
 ![bundleExample.gif](previews%2FbundleExample.gif)
 

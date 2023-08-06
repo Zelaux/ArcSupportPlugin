@@ -14,6 +14,7 @@ That plugin supports framework [Anuken/Arc](https://github.com/Anuken/Arc)
 
 ## Features
 
+ 
 
 #### Debug Renderers
 - `arc.graphics.Color`
@@ -23,6 +24,7 @@ That plugin supports framework [Anuken/Arc](https://github.com/Anuken/Arc)
 - `arc.graphics.Color`
 
 #### Line Markers
+- navigation for `arc.Events`
 - manipulation `arc.graphics.Color`(calculation & editing color)
 - displays buildin `arc.math.Interp` as interactive graphics
 
