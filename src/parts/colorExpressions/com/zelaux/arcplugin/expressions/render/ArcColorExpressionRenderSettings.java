@@ -5,7 +5,7 @@ import arc.struct.Seq;
 import com.intellij.ui.colorpicker.ColorPickerBuilderKt;
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpression;
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpressionSequence;
-import com.zelaux.arcplugin.settings.ArcPluginSettingsState;
+import com.zelaux.arcplugin.settings.MySettingsState;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -55,6 +55,6 @@ public class ArcColorExpressionRenderSettings {
     }
 
     public boolean isListView() {
-        return ArcPluginSettingsState.getInstance().viewColorExprSeqAsList;
+        return MySettingsState.getInstance().viewColorExprSeqAsList;
     }
 }

@@ -3,7 +3,6 @@ package com.zelaux.arcplugin.debugger.ui.tree.render;
 import arc.files.*;
 import com.intellij.debugger.settings.*;
 import com.intellij.debugger.ui.tree.render.*;
-import com.intellij.openapi.util.registry.*;
 import com.zelaux.arcplugin.settings.*;
 
 public class FiObjectRenderer extends CompoundRendererProvider{   {
@@ -26,6 +25,6 @@ public class FiObjectRenderer extends CompoundRendererProvider{   {
 
     @Override
     protected boolean isEnabled(){
-        return ArcPluginSettingsState.getInstance().enabledDebugViewForFi;
+        return MySettingsState.getInstance().enabledDebugViewForFi;
     }
 }

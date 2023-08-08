@@ -7,6 +7,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.util.Alarm;
 import com.intellij.util.SmartList;
+import com.zelaux.arcplugin.settings.MySettingsState;
 import com.zelaux.arcplugin.utils.CheckedDisposable;
 import com.zelaux.arcplugin.utils.cache.MyParameterizedCachedValue;
 import kotlin.Unit;
@@ -45,6 +46,9 @@ public class AutoUpdatableEventCache<TYPE> implements Runnable {
     }
 
     public void checkCalculation() {
+        if (!MySettingsState.getInstance().backgroundEventIndexing) {
+            return;
+        }
         if (dependencies != null && cachedValue.isUpToDate(dependencies)) return;
         if (!disposable.isDisposed()) {
             Disposer.dispose(disposable);
@@ -74,7 +78,7 @@ public class AutoUpdatableEventCache<TYPE> implements Runnable {
 
     private void postBackgroundAction() {
         if (isLibraries) {
-            com.intellij.openapi.progress.ProgressKt.runBackgroundableTask(name, project, false, task -> {
+            com.intellij.openapi.progress.ProgressKt.runBackgroundableTask(name, project, true, task -> {
                 task.setFraction(0);
                 synchronized (myAlarm) {
                     myOwnCache = cachedValue.getValue(disposable);
@@ -89,7 +93,6 @@ public class AutoUpdatableEventCache<TYPE> implements Runnable {
                         myOwnCache = cachedValue.getValue(disposable);
                     }
                 } catch (ProcessCanceledException e) {
-                    this.dependencies = null;
                 }
             });
         }

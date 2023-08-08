@@ -72,7 +72,7 @@ public class CustomNodeRendererSettings{
     }
 
     public static void updateState(){
-        ArcPluginSettingsState settings = ArcPluginSettingsState.getInstance();
+        MySettingsState settings = MySettingsState.getInstance();
         CustomNodeRendererSettings.seqRenderer.setEnabled(settings.enabledDebugViewForSeq);
         CustomNodeRendererSettings.objectMapRenderer.setEnabled(settings.enabledDebugViewForObjectMap);
         CustomNodeRendererSettings.objectMapEntryRenderer.setEnabled(settings.enabledDebugViewForObjectMapEntry);

@@ -8,13 +8,14 @@ plugins {
 val arcVersion = "v141.1"
 
 group = "com.github.Zelaux"
-version = "0.6"
+version = "0.7.0"
 
 repositories {
     mavenCentral()
     maven { url = uri("https://jitpack.io") }
 }
 dependencies {
+    implementation("org.openjdk.nashorn:nashorn-core:15.4")
     implementation("com.github.Anuken.Arc:arc-core:$arcVersion")
 }
 

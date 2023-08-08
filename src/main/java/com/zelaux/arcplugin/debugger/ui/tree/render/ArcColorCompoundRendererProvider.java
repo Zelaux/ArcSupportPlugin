@@ -2,7 +2,6 @@ package com.zelaux.arcplugin.debugger.ui.tree.render;
 
 import com.intellij.debugger.engine.*;
 import com.intellij.debugger.engine.evaluation.*;
-import com.intellij.debugger.engine.events.*;
 import com.intellij.debugger.ui.tree.render.*;
 import com.intellij.openapi.diagnostic.*;
 import com.intellij.ui.scale.*;
@@ -10,11 +9,9 @@ import com.intellij.util.ui.*;
 import com.sun.jdi.*;
 import com.zelaux.arcplugin.*;
 import com.zelaux.arcplugin.settings.*;
-import org.jetbrains.annotations.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 
 public class ArcColorCompoundRendererProvider extends CompoundRendererProvider{
     {
@@ -68,7 +65,7 @@ public class ArcColorCompoundRendererProvider extends CompoundRendererProvider{
 
     @Override
     protected boolean isEnabled(){
-        return ArcPluginSettingsState.getInstance().enabledDebugViewForColor;
+        return MySettingsState.getInstance().enabledDebugViewForColor;
     }
 
     private static final Logger LOG = Logger.getInstance(ArcColorCompoundRendererProvider.class);
