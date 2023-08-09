@@ -14,20 +14,16 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
 
-    <xi:include href="/META-INF/description.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/description.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
-    <depends optional="true" config-file="/META-INF/jvmlang/java.xml">com.intellij.modules.java</depends>
-    <depends optional="true" config-file="/META-INF/jvmlang/scala.xml">org.intellij.scala</depends>
     <depends optional="true" config-file="/META-INF/jvmlang/kotlin.xml">org.jetbrains.kotlin</depends>
-    <depends optional="true" config-file="/META-INF/jvmlang/groovy.xml">org.intellij.groovy</depends>
     <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.modules.lang</depends>
     <depends>org.intellij.intelliLang</depends>
     <depends>com.intellij.properties</depends>
 
-    <xi:include href="/META-INF/debug.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/debug.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/settings.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/debug.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/settings.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
     <extensionPoints>
 
@@ -37,18 +33,20 @@
             <with attribute="implementationClass"
                   implements="com.zelaux.arcplugin.langinfo.LanguageInfo"/>
         </extensionPoint>
-        <extensionPoint name="customColorProvider" interface="com.zelaux.arcplugin.marker.color.ElementColorViewerProvider" dynamic="true"/>
-        <extensionPoint name="expressionParserSequenceProvider" interface="com.zelaux.arcplugin.marker.ExpressionSequenceProvider" dynamic="true"/>
+        <extensionPoint name="customColorProvider"
+                        interface="com.zelaux.arcplugin.marker.color.ElementColorViewerProvider" dynamic="true"/>
+        <extensionPoint name="expressionParserSequenceProvider"
+                        interface="com.zelaux.arcplugin.marker.ExpressionSequenceProvider" dynamic="true"/>
     </extensionPoints>
 
-    <xi:include href="/META-INF/events.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/color.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/arc-collections.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/plugin_extensions_points.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/completion/bundle-completion.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/completion/reflect-completion.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/plugin_extensions.xml"  xpointer="xpointer(/idea-plugin/*)"/>
-    <xi:include href="/META-INF/customLang/arc_command_params_lang.xml"  xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/events.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/color.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/arc-collections.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/plugin_extensions_points.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/completion/bundle-completion.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/completion/reflect-completion.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/plugin_extensions.xml" xpointer="xpointer(/idea-plugin/*)"/>
+    <xi:include href="/META-INF/customLang/arc_command_params_lang.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
     <actions>
         <action
