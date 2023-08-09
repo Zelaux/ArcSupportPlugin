@@ -54,9 +54,13 @@ public class EventsCacheValueProvider<T> extends MyParameterizedCachedValueProvi
         CollectionsKt.addAll(this.dependencies, dependencies);
         targetMethods = CachedValuesManager.getManager(project).createCachedValue(() -> {
             PsiMethod[] methods = PsiMethod.EMPTY_ARRAY;
-            if (EventIndexingManager.isEnabled())
-                methods = indexing.methods();
-
+            if (EventIndexingManager.isEnabled()) {
+                if (ApplicationManagerEx.getApplicationEx().holdsReadLock()) {
+                    methods = indexing.methods();
+                } else {
+                    methods = ReadAction.compute(indexing::methods);
+                }
+            }
             return CachedValueProvider.Result.create(new NaNObject<>(methods), EventIndexingManager.arcEventsClass);
         });
     }
@@ -102,7 +106,7 @@ public class EventsCacheValueProvider<T> extends MyParameterizedCachedValueProvi
 
     @Override
     public @Nullable HashMap<EventType, SmartList<T>> computeValue(CheckedDisposable disposable) {
-        if (ApplicationManagerEx.getApplicationEx().holdsReadLock()) {
+        if (ApplicationManagerEx.getApplicationEx().holdsReadLock() || true) {
             return collect(disposable, provider.getScope(project));
         } else {
             return ReadAction.compute(() -> collect(disposable, provider.getScope(project)));

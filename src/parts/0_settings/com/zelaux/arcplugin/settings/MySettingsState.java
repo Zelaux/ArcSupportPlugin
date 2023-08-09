@@ -30,7 +30,7 @@ public class MySettingsState implements PersistentStateComponent<MySettingsState
     public boolean viewColorExprSeqAsList = false;
     @SettingField(title = "Do indexing for arc.Events in background? ", component = "checkBox()")
     @Separator
-    public boolean backgroundEventIndexing = false;
+    public boolean backgroundEventIndexing = true;
     public static MySettingsState getInstance() {
         return ApplicationManager.getApplication().getService(MySettingsState.class);
     }

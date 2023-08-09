@@ -2,6 +2,8 @@ package com.zelaux.arcplugin.events.indexing;
 
 import arc.Events;
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.ReadAction;
+import com.intellij.openapi.application.ex.ApplicationManagerEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootModificationTracker;
 import com.intellij.psi.JavaPsiFacade;
@@ -18,6 +20,7 @@ import com.zelaux.arcplugin.events.activities.EventsCacheValueProvider;
 import com.zelaux.arcplugin.events.activities.poststatrup.EventIndexingPostStartupActivity;
 import com.zelaux.arcplugin.utils.CheckedDisposable;
 import com.zelaux.arcplugin.utils.cache.MyCacheValuesFactory;
+import org.jetbrains.annotations.Nullable;
 
 public class EventIndexingManager {
     public static final FireEventIndexing fireEventIndexing = new FireEventIndexing();
@@ -54,10 +57,20 @@ public class EventIndexingManager {
     public static void startup(Project project) {
         CachedValuesManager cacheManager = CachedValuesManager.getManager(project);
 
-        arcEventsClass = cacheManager.createCachedValue(() -> {
-            JavaPsiFacade javaPsiFacade = JavaPsiFacade.getInstance(project);
-            GlobalSearchScope projectScope = GlobalSearchScope.allScope(project);
-            return CachedValueProvider.Result.create(javaPsiFacade.findClass(Events.class.getCanonicalName(), projectScope), ProjectRootModificationTracker.getInstance(project));
+        arcEventsClass = cacheManager.createCachedValue(new CachedValueProvider<PsiClass>() {
+            @Override
+            public @Nullable Result<PsiClass> compute() {
+                if(ApplicationManagerEx.getApplicationEx().holdsReadLock()){
+                    return getClass_();
+                }else{
+                    return ReadAction.compute(this::getClass_);
+                }
+            }
+            Result<PsiClass> getClass_(){
+                JavaPsiFacade javaPsiFacade = JavaPsiFacade.getInstance(project);
+                GlobalSearchScope projectScope = GlobalSearchScope.allScope(project);
+                return CachedValueProvider.Result.create(javaPsiFacade.findClass(Events.class.getCanonicalName(), projectScope), ProjectRootModificationTracker.getInstance(project));
+            }
         });
 
         for (EventIndexing<?> indexing : EventIndexingManager.allIndexing) {

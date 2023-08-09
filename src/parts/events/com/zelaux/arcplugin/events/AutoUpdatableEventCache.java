@@ -21,6 +21,7 @@ public class AutoUpdatableEventCache<TYPE> implements Runnable {
     public final CheckedDisposable disposable;
     public final MyParameterizedCachedValue<HashMap<EventType, SmartList<TYPE>>, CheckedDisposable> cachedValue;
     final Alarm myAlarm = new Alarm();
+    final Object myCalculationLock = new Object();
     long[] dependencies = null;
     private HashMap<EventType, SmartList<TYPE>> myOwnCache;
 
@@ -37,7 +38,7 @@ public class AutoUpdatableEventCache<TYPE> implements Runnable {
     }
 
     public HashMap<EventType, SmartList<TYPE>> getValue() {
-        synchronized (myAlarm) {
+        synchronized (myCalculationLock) {
             if (myOwnCache == null) {
                 myOwnCache = cachedValue.getValue(null);
             }
@@ -80,7 +81,7 @@ public class AutoUpdatableEventCache<TYPE> implements Runnable {
         if (isLibraries) {
             com.intellij.openapi.progress.ProgressKt.runBackgroundableTask(name, project, true, task -> {
                 task.setFraction(0);
-                synchronized (myAlarm) {
+                synchronized (myCalculationLock) {
                     myOwnCache = cachedValue.getValue(disposable);
                 }
                 task.setFraction(1);
@@ -89,7 +90,7 @@ public class AutoUpdatableEventCache<TYPE> implements Runnable {
         } else {
             BackgroundTaskUtil.submitTask(disposable, () -> {
                 try {
-                    synchronized (myAlarm) {
+                    synchronized (myCalculationLock) {
                         myOwnCache = cachedValue.getValue(disposable);
                     }
                 } catch (ProcessCanceledException e) {

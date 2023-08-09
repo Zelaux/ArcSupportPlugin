@@ -1,21 +1,17 @@
 package com.zelaux.arcplugin.events.activities;
 
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.ex.ActionUtil;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Disposer;
 import com.zelaux.arcplugin.events.AutoUpdatableEventCache;
 import com.zelaux.arcplugin.events.indexing.EventIndexingManager;
-import com.zelaux.arcplugin.utils.CheckedDisposable;
-import com.zelaux.arcplugin.utils.cache.MyParameterizedCachedValue;
-import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 public class UpdateActivity implements Runnable {
     @SuppressWarnings("unchecked")
     public final Project project;
     final AutoUpdatableEventCache<?>[] updatableEventCaches;
+    boolean wasDump = false;
 
     public UpdateActivity(@NotNull Project project) {
         this.project = project;
@@ -29,9 +25,17 @@ public class UpdateActivity implements Runnable {
 
     @Override
     public void run() {
-        if (ActionUtil.isDumbMode(project)) return;
+        boolean dumbMode = ActionUtil.isDumbMode(project);
+        if (dumbMode && !wasDump) {
+            DumbService.getInstance(project).runWhenSmart(() -> {
+                for (AutoUpdatableEventCache<?> cache : updatableEventCaches) {
+                    if (cache.isLibraries) cache.checkCalculation();
+                }
+            });
+        }
+        wasDump = dumbMode;
         for (AutoUpdatableEventCache<?> eventCache : updatableEventCaches) {
-            eventCache.checkCalculation();
+            if (!eventCache.isLibraries) eventCache.checkCalculation();
         }
     }
 
