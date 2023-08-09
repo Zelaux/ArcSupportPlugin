@@ -30,7 +30,7 @@ public class AutoUpdatableEventCache<TYPE> implements Runnable {
                                    boolean isLibraries,
                                    CheckedDisposable disposable,
                                    MyParameterizedCachedValue<HashMap<EventType, SmartList<TYPE>>, CheckedDisposable> cachedValue) {
-        this.name = name;
+        this.name = "Indexing " +name;
         this.project = project;
         this.isLibraries = isLibraries;
         this.disposable = disposable;
