@@ -1,43 +1,47 @@
 package com.zelaux.arcplugin.ui.colorparser;
 
-import com.intellij.openapi.*;
-import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.actionSystem.impl.ActionButton;
-import com.intellij.openapi.project.*;
-import com.intellij.openapi.util.*;
-import com.intellij.ui.*;
-import com.intellij.ui.paint.*;
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.ActionCallback;
+import com.intellij.openapi.util.registry.Registry;
+import com.intellij.ui.ComponentWithMnemonics;
+import com.intellij.ui.ExperimentalUI;
+import com.intellij.ui.paint.LinePainter2D;
 import com.intellij.ui.tabs.*;
 import com.intellij.ui.tabs.impl.*;
-import com.intellij.util.ui.*;
-import com.zelaux.arcplugin.actions.*;
-import org.jetbrains.annotations.*;
+import com.intellij.ui.tabs.impl.themes.TabTheme;
+import com.intellij.util.ui.JBUI;
+import com.intellij.util.ui.UIUtil;
+import com.zelaux.arcplugin.actions.CustomEntryPointActionGroups;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ColorExpressionParserTabs extends SingleHeightTabs implements ComponentWithMnemonics{
+public class ColorExpressionParserTabs extends SingleHeightTabs implements ComponentWithMnemonics {
 
 
     private boolean active;
 
-    public ColorExpressionParserTabs(Project project, @NotNull Disposable parentDisposable, @NotNull TabInfo... tabs){
+    public ColorExpressionParserTabs(Project project, @NotNull Disposable parentDisposable, @NotNull TabInfo... tabs) {
         super(project, parentDisposable);
 
-        for(TabInfo tab : tabs){
+        for (TabInfo tab : tabs) {
             addTab(tab);
         }
 //        UIUtil.addAwtListener(e -> updateActive(), AWTEvent.FOCUS_EVENT_MASK, parentDisposable);
         setUiDecorator(() -> new UiDecorator.UiDecoration(null, JBUI.CurrentTheme.EditorTabs.tabInsets()));
 
         remove(myMoreToolbar.getComponent());
-        if(myEntryPointToolbar != null){
+        if (myEntryPointToolbar != null) {
 //            remove(myEntryPointToolbar.getComponent());
 
         }
-        addListener(new TabsListener(){
+        addListener(new TabsListener() {
             @Override
-            public void selectionChanged(TabInfo oldSelection, TabInfo newSelection){
+            public void selectionChanged(TabInfo oldSelection, TabInfo newSelection) {
                 TabsListener.super.selectionChanged(oldSelection, newSelection);
                 doLayout();
 
@@ -47,36 +51,36 @@ public class ColorExpressionParserTabs extends SingleHeightTabs implements Compo
     }
 
     @Override
-    public Dimension getPreferredSize(){
+    public Dimension getPreferredSize() {
 //        return super.getPreferredSize();
         TabInfo info = getSelectedInfo();
         return info.getComponent().getPreferredSize();
     }
 
     @Override
-    public int getWidth(){
+    public int getWidth() {
         return super.getWidth();
     }
 
     @Override
-    protected void addImpl(Component comp, Object constraints, int index){
+    protected void addImpl(Component comp, Object constraints, int index) {
         super.addImpl(comp, constraints, index);
     }
 
     @Override
-    protected boolean supportsTableLayoutAsSingleRow(){
+    protected boolean supportsTableLayoutAsSingleRow() {
         return true;
     }
 
     @Override
-    protected void paintChildren(Graphics g){
-        if(!isHideTabs()){
+    protected void paintChildren(Graphics g) {
+        if (!isHideTabs()) {
             TabLabel label = getSelectedLabel();
-            if(label != null){
+            if (label != null) {
                 int h = label.getHeight();
                 Color color = myTabPainter.getTabTheme().getBorderColor();
                 g.setColor(color);
-                LinePainter2D.paint(((Graphics2D)g), 0, h, getWidth(), h);
+                LinePainter2D.paint(((Graphics2D) g), 0, h, getWidth(), h);
             }
         }
         super.paintChildren(g);
@@ -84,16 +88,16 @@ public class ColorExpressionParserTabs extends SingleHeightTabs implements Compo
     }
 
     @Override
-    protected DefaultActionGroup getEntryPointActionGroup(){
+    protected DefaultActionGroup getEntryPointActionGroup() {
         return CustomEntryPointActionGroups.getColorExprTabsEntryPoint();
     }
 
     @NotNull
     @Override
-    protected TabLabel createTabLabel(@NotNull TabInfo info){
-        return new SingleHeightLabel(this, info){
+    protected TabLabel createTabLabel(@NotNull TabInfo info) {
+        return new SingleHeightLabel(this, info) {
             @Override
-            protected int getPreferredHeight(){
+            protected int getPreferredHeight() {
                 Insets insets = getInsets();
                 Insets layoutInsets = getLayoutInsets();
 
@@ -107,7 +111,7 @@ public class ColorExpressionParserTabs extends SingleHeightTabs implements Compo
             }
 
             @Override
-            public void paint(Graphics g){
+            public void paint(Graphics g) {
                 /*if (ExperimentalUI.isNewEditorTabs() && getSelectedInfo() != info && !isHoveredTab(this)) {
                     GraphicsConfig config = GraphicsUtil.paintWithAlpha(g, JBUI.getFloat("EditorTabs.hoverAlpha", 0.75f));
                     super.paint(g);
@@ -120,46 +124,46 @@ public class ColorExpressionParserTabs extends SingleHeightTabs implements Compo
     }
 
     @Override
-    protected TabPainterAdapter createTabPainterAdapter(){
-        return new EditorTabPainterAdapter();
+    protected TabPainterAdapter createTabPainterAdapter() {
+        return new MyEditorTabPainterAdapter();
     }
 
     @Override
-    protected JBTabsBorder createTabBorder(){
+    protected JBTabsBorder createTabBorder() {
         return new JBEditorTabsBorder(this);
     }
 
     @NotNull
     @Override
-    public ActionCallback select(@NotNull TabInfo info, boolean requestFocus){
+    public ActionCallback select(@NotNull TabInfo info, boolean requestFocus) {
         active = true;
         return super.select(info, requestFocus);
     }
 
-    private void updateActive(){
+    private void updateActive() {
         checkActive();
         SwingUtilities.invokeLater(() -> {
             checkActive();
         });
     }
 
-    private void checkActive(){
+    private void checkActive() {
         boolean newActive = UIUtil.isFocusAncestor(this);
 
-        if(newActive != active){
+        if (newActive != active) {
             active = newActive;
             revalidateAndRepaint();
         }
     }
 
     @Override
-    protected boolean isActiveTabs(TabInfo info){
+    protected boolean isActiveTabs(TabInfo info) {
         return active;
     }
 
     @Nullable
     @Override
-    public TabInfo getToSelectOnRemoveOf(TabInfo info){
+    public TabInfo getToSelectOnRemoveOf(TabInfo info) {
 //        if (myColorParserSequence.isDisposed()) return null;
        /* int index = getIndexOf(info);
         if (index != -1) {
@@ -173,14 +177,89 @@ public class ColorExpressionParserTabs extends SingleHeightTabs implements Compo
     }
 
     @Override
-    public void remove(int index){
+    public void remove(int index) {
         super.remove(index);
     }
 
     @Override
-    public void revalidateAndRepaint(boolean layoutNow){
+    public void revalidateAndRepaint(boolean layoutNow) {
         //noinspection ConstantConditions - called from super constructor
 //        if (myColorParserSequence != null && myColorParserSequence.getOwner().isInsideChange()) return;
         super.revalidateAndRepaint(layoutNow);
+    }
+
+    static class MyEditorTabPainterAdapter implements TabPainterAdapter {
+        private final int magicOffset = 1;
+        private final JBEditorTabPainter painter = new JBEditorTabPainter();
+
+        @NotNull
+        @Override
+        public JBTabPainter getTabPainter() {
+            return painter;
+        }
+
+        @Override
+        public void paintBackground(@NotNull TabLabel label, @NotNull Graphics g, @NotNull JBTabsImpl __tabs) {
+            ColorExpressionParserTabs tabs = (ColorExpressionParserTabs) __tabs;
+            var info = label.getInfo();
+            var isSelected = info == tabs.getSelectedInfo();
+            var isHovered = tabs.isHoveredTab(label);
+
+            var rect = new Rectangle(0, 0, label.getWidth(), label.getHeight());
+
+            var g2d = (Graphics2D) g;
+            if (isSelected) {
+                painter.paintSelectedTab(tabs.getPosition(), g2d, rect,
+                        tabs.getBorderThickness(), info.getTabColor(),
+                        tabs.isActiveTabs(info), isHovered);
+                paintBorders(g2d, label, tabs);
+            } else {
+                //noinspection UnstableApiUsage
+                if (ExperimentalUI.isNewUI() && isHovered) {
+                    rect.height -= 1;
+                }
+                painter.paintTab(tabs.getPosition(), g2d, rect, tabs.getBorderThickness(), info.getTabColor(), tabs.isActiveTabs(info), isHovered);
+                paintBorders(g2d, label, tabs);
+            }
+        }
+
+        private void paintBorders(Graphics2D g, TabLabel label, ColorExpressionParserTabs tabs) {
+            var paintStandardBorder = !tabs.isSingleRow()
+                    || (!tabs.getPosition().isSide() && Registry.is("ide.new.editor.tabs.vertical.borders"));
+            var lastPinned = label.isLastPinned();
+            var nextToLastPinned = label.isNextToLastPinned();
+            var rect = new Rectangle(0, 0, label.getWidth(), label.getHeight());
+            if (paintStandardBorder || lastPinned || nextToLastPinned) {
+
+
+                var bounds = label.getBounds();
+                if (bounds.x > magicOffset && (paintStandardBorder || nextToLastPinned)) {
+                    painter.paintLeftGap(tabs.getPosition(), g, rect, tabs.getBorderThickness());
+                }
+
+                if (bounds.x + bounds.width < tabs.getWidth() - magicOffset && (paintStandardBorder || lastPinned)) {
+                    painter.paintRightGap(tabs.getPosition(), g, rect, tabs.getBorderThickness());
+                }
+            }
+
+            if (tabs.getPosition().isSide() && lastPinned) {
+                var bounds = label.getBounds();
+                if (bounds.y + bounds.height < tabs.getHeight() - magicOffset) {
+                    painter.paintBottomGap(tabs.getPosition(), g, rect, tabs.getBorderThickness());
+                }
+            }
+            if (tabs.getPosition().isSide() && nextToLastPinned) {
+                var bounds = label.getBounds();
+                if (bounds.y + bounds.height < tabs.getHeight() - magicOffset) {
+                    painter.paintTopGap(tabs.getPosition(), g, rect, tabs.getBorderThickness());
+                }
+            }
+        }
+
+        @NotNull
+        @Override
+        public TabTheme getTabTheme() {
+            return painter.getTabTheme();
+        }
     }
 }
