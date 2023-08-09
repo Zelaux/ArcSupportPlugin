@@ -2,7 +2,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable parentId="tools" instance="com.zelaux.arcplugin.settings.MySettingsConfigurable"
                                  id="settings.ArcPluginSettingsConfigurable"
-                                 displayName="ArcPlugin Settings"/>
+                                 displayName="Arc Support Settings"/>
         <applicationService serviceImplementation="com.zelaux.arcplugin.settings.MySettingsState"/>
     </extensions>
 </idea-plugin>
