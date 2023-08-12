@@ -6,13 +6,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.ActionCallback;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.ui.ComponentWithMnemonics;
-import com.intellij.ui.ExperimentalUI;
 import com.intellij.ui.paint.LinePainter2D;
 import com.intellij.ui.tabs.*;
 import com.intellij.ui.tabs.impl.*;
 import com.intellij.ui.tabs.impl.themes.TabTheme;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
+import com.zelaux.arcplugin.NewUI;
 import com.zelaux.arcplugin.actions.CustomEntryPointActionGroups;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -214,8 +214,7 @@ public class ColorExpressionParserTabs extends SingleHeightTabs implements Compo
                         tabs.isActiveTabs(info), isHovered);
                 paintBorders(g2d, label, tabs);
             } else {
-                //noinspection UnstableApiUsage
-                if (ExperimentalUI.isNewUI() && isHovered) {
+                if (NewUI.isEnabled() && isHovered) {
                     rect.height -= 1;
                 }
                 painter.paintTab(tabs.getPosition(), g2d, rect, tabs.getBorderThickness(), info.getTabColor(), tabs.isActiveTabs(info), isHovered);
