@@ -31,7 +31,7 @@ That plugin supports framework [Anuken/Arc](https://github.com/Anuken/Arc)
 #### Inspections
 - checks hex in `arc.graphics.Color.valueOf(__)`
 - argument count checking in `Map.of` methods
-- (raw) type checking in `Map.of` methods
+- (raw) type checking in `Map.of` methods[README.md](README.md)
 - Detects wrong variadic parameter position in `CommandHandler`.
 - Highlights parameters with duplicated names.
 - Transforms required parameter <-> optional parameter

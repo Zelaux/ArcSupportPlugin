@@ -8,7 +8,7 @@ plugins {
 val arcVersion = "v141.1"
 
 group = "com.github.Zelaux"
-version = "0.7.0"
+version = "0.7.5"
 
 repositories {
     mavenCentral()
@@ -17,6 +17,7 @@ repositories {
 dependencies {
     implementation("org.openjdk.nashorn:nashorn-core:15.4")
     implementation("com.github.Anuken.Arc:arc-core:$arcVersion")
+    testImplementation("junit:junit:4.13.2")
 }
 
 // Configure Gradle IntelliJ Plugin

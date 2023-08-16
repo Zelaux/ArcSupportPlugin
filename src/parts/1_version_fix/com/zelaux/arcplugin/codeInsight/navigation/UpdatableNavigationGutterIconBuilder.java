@@ -26,6 +26,7 @@ import com.intellij.util.NullableFunction;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.ElementPresentationManager;
+import com.zelaux.arcplugin.util.NotNullLazyRecalculatableValue;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -133,25 +134,10 @@ public class UpdatableNavigationGutterIconBuilder<T> {
         }
 
 //        return NotNullLazyValue.lazy(() -> calcPsiTargets(project, targets.create(), converter));
-        //noinspection NonExtendableApiUsage,deprecation
-        return new NotNullLazyValue<>() {
+        return NotNullLazyRecalculatableValue.create(()->
+                calcPsiTargets(project,targets.create(),converter)
+                );
 
-            @NotNull
-            @Override
-            protected List<SmartPsiElementPointer<?>> compute() {
-                return calcPsiTargets(project, targets.create(), converter);
-            }
-
-            @Override
-            public @NotNull List<SmartPsiElementPointer<?>> getValue() {
-                return compute();
-            }
-
-            @Override
-            public boolean isComputed() {
-                return false;
-            }
-        };
     }
 
     @NotNull
