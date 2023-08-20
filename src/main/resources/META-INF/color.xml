@@ -27,5 +27,7 @@
                 implementation="com.zelaux.arcplugin.colorExpression.ColorExpressionLineMarkerProvider"/>
         <expressionParserSequenceProvider
                 implementation="com.zelaux.arcplugin.interp.InterpExpressionProvider"/>
+        <expressionParserSequenceProvider
+                implementation="com.zelaux.arcplugin.colorExpression.ColorFieldAssignLineMarkerProvider"/>
     </extensions>
 </idea-plugin>

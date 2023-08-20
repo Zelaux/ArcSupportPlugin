@@ -5,7 +5,6 @@ import arc.struct.Seq;
 import com.intellij.ui.colorpicker.ColorPickerBuilderKt;
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpression;
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpressionSequence;
-import com.zelaux.arcplugin.settings.MySettingsState;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -22,11 +21,7 @@ public class ArcColorExpressionRenderSettings {
     }
 
     public Dimension calculateSliderSize() {
-        if (isListView())
-            return new Dimension(ColorPickerBuilderKt.PICKER_PREFERRED_WIDTH, 150 / 4);
-        else {
-            return new Dimension(ColorPickerBuilderKt.PICKER_PREFERRED_WIDTH, 150 / 2);
-        }
+        return new Dimension(ColorPickerBuilderKt.PICKER_PREFERRED_WIDTH, 150 / 4);
     }
 
     public ArcColorExpressionSequence sequence() {
@@ -54,7 +49,4 @@ public class ArcColorExpressionRenderSettings {
         staticListeners.each(Runnable::run);
     }
 
-    public boolean isListView() {
-        return MySettingsState.getInstance().viewColorExprSeqAsList;
-    }
 }

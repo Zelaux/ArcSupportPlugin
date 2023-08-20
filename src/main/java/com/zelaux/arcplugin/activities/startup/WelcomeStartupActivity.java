@@ -37,18 +37,20 @@ public class WelcomeStartupActivity implements StartupActivity {
         moveSomeStuff();
 
         /*EventLineMarkerProvider.*/
-        JBPopupFactory.getInstance()
-                .createHtmlTextBalloonBuilder(
-                        "ZelauxArcPlugin(v0.31) started",
-                        MessageType.INFO,
-                        /*KtSimpleNameReferenceDescriptorsImpl*/
-                        e -> {
-                            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+     if(statusBar.getComponent()!=null){
+         JBPopupFactory.getInstance()
+                 .createHtmlTextBalloonBuilder(
+                         "ZelauxArcPlugin(v0.31) started",
+                         MessageType.INFO,
+                         /*KtSimpleNameReferenceDescriptorsImpl*/
+                         e -> {
+                             if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 //                enableAnnotations(project)
-                            }
-                        })
-                .createBalloon()
-                .show(RelativePoint.getCenterOf(statusBar.getComponent()), Balloon.Position.atRight);
+                             }
+                         })
+                 .createBalloon()
+                 .show(RelativePoint.getCenterOf(statusBar.getComponent()), Balloon.Position.atRight);
+     }
 //        Messages.showInfoMessage(project,"Hello from Test activity",project.getName());
     }
 

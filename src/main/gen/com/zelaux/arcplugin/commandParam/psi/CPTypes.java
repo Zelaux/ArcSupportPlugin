@@ -10,37 +10,37 @@ import com.zelaux.arcplugin.commandParam.psi.impl.*;
 
 public interface CPTypes {
 
-  IElementType CP_ID = new CommandParamElementType("CP_ID");
-  IElementType CP_OPTIONAL_PARAM = new CommandParamElementType("CP_OPTIONAL_PARAM");
-  IElementType CP_PARAM = new CommandParamElementType("CP_PARAM");
-  IElementType CP_PARAM_LIST = new CommandParamElementType("CP_PARAM_LIST");
-  IElementType CP_REQUIRED_PARAM = new CommandParamElementType("CP_REQUIRED_PARAM");
-  IElementType CP_VARIADIC = new CommandParamElementType("CP_VARIADIC");
+  IElementType ID = new CommandParamElementType("ID");
+  IElementType OPTIONAL_PARAM = new CommandParamElementType("OPTIONAL_PARAM");
+  IElementType PARAM = new CommandParamElementType("PARAM");
+  IElementType PARAM_LIST = new CommandParamElementType("PARAM_LIST");
+  IElementType REQUIRED_PARAM = new CommandParamElementType("REQUIRED_PARAM");
+  IElementType VARIADIC = new CommandParamElementType("VARIADIC");
 
-  IElementType CP_DOTS = new CommandParamTokenType("...");
-  IElementType CP_IDENTIFIER = new CommandParamTokenType("IDENTIFIER");
-  IElementType CP_LEFT_ARROW = new CommandParamTokenType("<");
-  IElementType CP_LEFT_BRACKET = new CommandParamTokenType("[");
-  IElementType CP_RIGHT_ARROW = new CommandParamTokenType(">");
-  IElementType CP_RIGHT_BRACKET = new CommandParamTokenType("]");
-  IElementType CP_SPACE = new CommandParamTokenType(" ");
+  IElementType DOTS = new CommandParamTokenType("...");
+  IElementType IDENTIFIER = new CommandParamTokenType("IDENTIFIER");
+  IElementType LEFT_ARROW = new CommandParamTokenType("<");
+  IElementType LEFT_BRACKET = new CommandParamTokenType("[");
+  IElementType RIGHT_ARROW = new CommandParamTokenType(">");
+  IElementType RIGHT_BRACKET = new CommandParamTokenType("]");
+  IElementType SPACE = new CommandParamTokenType(" ");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == CP_ID) {
+      if (type == ID) {
         return new PsiACPIdImpl(node);
       }
-      else if (type == CP_OPTIONAL_PARAM) {
+      else if (type == OPTIONAL_PARAM) {
         return new PsiACPOptionalParamImpl(node);
       }
-      else if (type == CP_PARAM_LIST) {
+      else if (type == PARAM_LIST) {
         return new PsiACPParamListImpl(node);
       }
-      else if (type == CP_REQUIRED_PARAM) {
+      else if (type == REQUIRED_PARAM) {
         return new PsiACPRequiredParamImpl(node);
       }
-      else if (type == CP_VARIADIC) {
+      else if (type == VARIADIC) {
         return new PsiACPVariadicImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);

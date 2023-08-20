@@ -4,6 +4,7 @@ import arc.struct.Seq;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.util.Ref;
+import com.intellij.psi.PsiClass;
 import com.intellij.ui.colorpicker.LightCalloutPopup;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.scale.JBUIScale;
@@ -17,12 +18,17 @@ import com.zelaux.arcplugin.expressions.resolve.methods.StaticSetColorExpression
 import com.zelaux.arcplugin.ui.JPanelBuilder;
 import com.zelaux.arcplugin.utils.CustomUastTreeUtil;
 import com.zelaux.arcplugin.utils.LazyValue;
+import com.zelaux.arcplugin.utils.resolve.FieldData;
+import com.zelaux.arcplugin.utils.resolve.StaticFieldResolver;
 import kotlin.collections.ArraysKt;
 import org.jetbrains.uast.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class StaticSetColorParserRenderer extends ArcColorExpressionRenderer implements ArcImportableColorExpressionRenderer {
     public final StaticSetColorExpression self;
@@ -47,14 +53,15 @@ public class StaticSetColorParserRenderer extends ArcColorExpressionRenderer imp
         UField currentField = CustomUastTreeUtil.resolveRecursiveField(self.getTargetExpression());
         if (currentField == null) return FieldWithColor.EMPTY_ARRAY;
         Seq<FieldWithColor> seq = new Seq<>();
-        UClass containingClass = CustomUastTreeUtil.getContainingClass(currentField);
-        if (containingClass == null) return FieldWithColor.EMPTY_ARRAY;
-        for (UField field : containingClass.getFields()) {
-            UExpression initializer = field.getUastInitializer();
-            if (initializer == null) continue;
-            Color resolved = ColorExpressionResolver.resolveColor(initializer);
+        List<FieldData> fields = StaticFieldResolver.getFields((PsiClass) CustomUastTreeUtil.getContainingClass(currentField).getSourcePsi())
+                .map(Map.Entry::getValue)
+                .toList()
+                ;
+        if (fields.isEmpty()) return FieldWithColor.EMPTY_ARRAY;
+        for (FieldData field : fields) {
+            Color resolved = ColorExpressionResolver.resolveColor(field.uastInitializer());
             if (resolved == null) continue;
-            seq.add(new FieldWithColor(field, resolved));
+            seq.add(new FieldWithColor(field.uastField(), resolved));
         }
         return seq.toArray(FieldWithColor.class);
     }

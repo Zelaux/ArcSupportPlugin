@@ -9,7 +9,7 @@
   psiImplUtilClass="com.zelaux.arcplugin.commandParam.psi.impl.CommandParamPsiImplUtil"
 
   elementTypeHolderClass="com.zelaux.arcplugin.commandParam.psi.CPTypes"
-  elementTypePrefix="CP_"
+
   elementTypeClass="com.zelaux.arcplugin.commandParam.parsing.psi.tree.CommandParamElementType"
   tokenTypeClass="com.zelaux.arcplugin.commandParam.parsing.psi.tree.CommandParamTokenType"
 

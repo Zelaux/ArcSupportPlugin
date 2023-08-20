@@ -15,11 +15,11 @@ import java.awt.Color
 
 object ArcColorUtils {
     @JvmStatic
-    fun resolveColor(expression: UExpression): Color? = resolveColorSequence(expression)?.resultColor
+    fun resolveColor(initializer: UExpression): Color? = resolveColorSequence(initializer)?.resultColor
 
     @JvmStatic
-    fun resolveColorSequence(expression: UExpression): ColorExpParserSequence? {
-        val sourcePsi = expression.sourcePsi!!
+    fun resolveColorSequence(initializer: UExpression): ColorExpParserSequence? {
+        val sourcePsi = initializer.sourcePsi!!
         if (sourcePsi is PsiCallExpression) {
             return SmartColorResolver.run { sourcePsi.resolveColor() }
         }

@@ -36,7 +36,7 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
   }
 
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
-    create_token_set_(CP_OPTIONAL_PARAM, CP_PARAM, CP_REQUIRED_PARAM),
+    create_token_set_(OPTIONAL_PARAM, PARAM, REQUIRED_PARAM),
   };
 
   /* ********************************************************** */
@@ -51,10 +51,10 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
   // IDENTIFIER
   public static boolean id(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "id")) return false;
-    if (!nextTokenIs(b, "<identifier>", CP_IDENTIFIER)) return false;
+    if (!nextTokenIs(b, "<identifier>", IDENTIFIER)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, CP_ID, "<identifier>");
-    r = consumeToken(b, CP_IDENTIFIER);
+    Marker m = enter_section_(b, l, _NONE_, ID, "<identifier>");
+    r = consumeToken(b, IDENTIFIER);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -63,14 +63,14 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
   // LEFT_BRACKET id variadic? RIGHT_BRACKET
   public static boolean optional_param(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "optional_param")) return false;
-    if (!nextTokenIs(b, CP_LEFT_BRACKET)) return false;
+    if (!nextTokenIs(b, LEFT_BRACKET)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, CP_LEFT_BRACKET);
+    r = consumeToken(b, LEFT_BRACKET);
     r = r && id(b, l + 1);
     r = r && optional_param_2(b, l + 1);
-    r = r && consumeToken(b, CP_RIGHT_BRACKET);
-    exit_section_(b, m, CP_OPTIONAL_PARAM, r);
+    r = r && consumeToken(b, RIGHT_BRACKET);
+    exit_section_(b, m, OPTIONAL_PARAM, r);
     return r;
   }
 
@@ -85,9 +85,9 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
   // optional_param | required_param
   public static boolean param(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "param")) return false;
-    if (!nextTokenIs(b, "<param>", CP_LEFT_ARROW, CP_LEFT_BRACKET)) return false;
+    if (!nextTokenIs(b, "<param>", LEFT_ARROW, LEFT_BRACKET)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, CP_PARAM, "<param>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, PARAM, "<param>");
     r = optional_param(b, l + 1);
     if (!r) r = required_param(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -98,9 +98,9 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
   // param (SPACE param)*
   public static boolean param_list(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "param_list")) return false;
-    if (!nextTokenIs(b, "<param list>", CP_LEFT_ARROW, CP_LEFT_BRACKET)) return false;
+    if (!nextTokenIs(b, "<param list>", LEFT_ARROW, LEFT_BRACKET)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, CP_PARAM_LIST, "<param list>");
+    Marker m = enter_section_(b, l, _NONE_, PARAM_LIST, "<param list>");
     r = param(b, l + 1);
     r = r && param_list_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -123,7 +123,7 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "param_list_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, CP_SPACE);
+    r = consumeToken(b, SPACE);
     r = r && param(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -133,13 +133,13 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
   // LEFT_ARROW id variadic? RIGHT_ARROW
   public static boolean required_param(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "required_param")) return false;
-    if (!nextTokenIs(b, "<required param>", CP_LEFT_ARROW)) return false;
+    if (!nextTokenIs(b, "<required param>", LEFT_ARROW)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, CP_REQUIRED_PARAM, "<required param>");
-    r = consumeToken(b, CP_LEFT_ARROW);
+    Marker m = enter_section_(b, l, _NONE_, REQUIRED_PARAM, "<required param>");
+    r = consumeToken(b, LEFT_ARROW);
     r = r && id(b, l + 1);
     r = r && required_param_2(b, l + 1);
-    r = r && consumeToken(b, CP_RIGHT_ARROW);
+    r = r && consumeToken(b, RIGHT_ARROW);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -155,11 +155,11 @@ public class ArcCommandParamsParser implements PsiParser, LightPsiParser {
   // DOTS
   public static boolean variadic(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "variadic")) return false;
-    if (!nextTokenIs(b, CP_DOTS)) return false;
+    if (!nextTokenIs(b, DOTS)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, CP_DOTS);
-    exit_section_(b, m, CP_VARIADIC, r);
+    r = consumeToken(b, DOTS);
+    exit_section_(b, m, VARIADIC, r);
     return r;
   }
 

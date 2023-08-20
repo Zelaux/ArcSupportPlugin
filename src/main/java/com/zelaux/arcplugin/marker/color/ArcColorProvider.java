@@ -69,8 +69,8 @@ public class ArcColorProvider implements ElementColorViewerProvider{
                 return getColorInner(expression);
             }
         }
-      /*  if(ArcColorUtils.isDrawColor(expression)){
-//            return getColor(expression);
+      /*  if(ArcColorUtils.isDrawColor(initializer)){
+//            return getColor(initializer);
         }*/
         return NullColorResult.INSTANCE;
     }

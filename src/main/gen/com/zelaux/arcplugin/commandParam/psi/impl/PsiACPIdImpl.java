@@ -30,7 +30,7 @@ public class PsiACPIdImpl extends ASTWrapperPsiElement implements PsiACPId {
   @Override
   @NotNull
   public PsiElement getIdentifier() {
-    return findNotNullChildByType(CP_IDENTIFIER);
+    return findNotNullChildByType(IDENTIFIER);
   }
 
 }

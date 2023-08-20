@@ -29,10 +29,10 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
     static {
         ourMap = new HashMap<>();
 
-        fillMap(ourMap, IDENTIFIER, CPTypes.CP_IDENTIFIER);
+        fillMap(ourMap, IDENTIFIER, CPTypes.IDENTIFIER);
         fillMap(ourMap, BRACKETS,
-                CPTypes.CP_LEFT_BRACKET, CPTypes.CP_RIGHT_BRACKET,CPTypes.CP_LEFT_ARROW,CPTypes.CP_RIGHT_ARROW);
-        fillMap(ourMap, DOT, CPTypes.CP_DOTS);
+                CPTypes.LEFT_BRACKET, CPTypes.RIGHT_BRACKET,CPTypes.LEFT_ARROW,CPTypes.RIGHT_ARROW);
+        fillMap(ourMap, DOT, CPTypes.DOTS);
     }
 
     public ArcCommandParamsSyntaxHighlighter() {

@@ -62,7 +62,7 @@ public class ComponentSetterRenderer extends ArcColorExpressionRenderer {
                 this.setProgressColorValue(currentValue);
                 boolean updating = false;
             /*val key = AfterChangeAppliedKey {
-                UastExpressionUtils.getObject(expression.valueArguments[offset])
+                UastExpressionUtils.getObject(initializer.valueArguments[offset])
             }*/
                 addProgressListener(progress -> {
                     writeColorAction(project, () -> {

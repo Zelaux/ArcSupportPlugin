@@ -16,7 +16,8 @@
 
     <xi:include href="/META-INF/description.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
-    <depends optional="true" config-file="/META-INF/jvmlang/kotlin.xml">org.jetbrains.kotlin</depends>
+<!--    <depends optional="true" config-file="/META-INF/jvmlang/kotlin.xml">org.jetbrains.kotlin</depends>-->
+    <depends optional="true" config-file="/META-INF/dependencies/javaDecompiler.xml">org.jetbrains.java.decompiler</depends>
     <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.modules.lang</depends>
     <depends>org.intellij.intelliLang</depends>
@@ -37,6 +38,8 @@
                         interface="com.zelaux.arcplugin.marker.color.ElementColorViewerProvider" dynamic="true"/>
         <extensionPoint name="expressionParserSequenceProvider"
                         interface="com.zelaux.arcplugin.marker.ExpressionSequenceProvider" dynamic="true"/>
+        <extensionPoint name="sourceResolver"
+                        interface="com.zelaux.arcplugin.utils.resolve.SourceResolver" dynamic="true"/>
     </extensionPoints>
 
     <xi:include href="/META-INF/events.xml" xpointer="xpointer(/idea-plugin/*)"/>
@@ -49,13 +52,13 @@
     <xi:include href="/META-INF/customLang/arc_command_params_lang.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
     <actions>
-        <action
+        <!--<action
                 id="SwitchColorExprTabMode"
                 class="com.zelaux.arcplugin.actions.SwitchColorExprTabMode"
-                text="view color expression sequance as list"/>
+                text="view color initializer sequance as list"/>-->
 
         <group id="ColorExprTabsEntryPoint" popup="true" icon="AllIcons.Actions.More">
-            <reference id="SwitchColorExprTabMode"/>
+<!--            <reference id="SwitchColorExprTabMode"/>-->
             <add-to-group group-id="WindowMenu"/>
         </group>
     </actions>

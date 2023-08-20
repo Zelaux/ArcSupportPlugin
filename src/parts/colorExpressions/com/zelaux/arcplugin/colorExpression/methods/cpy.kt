@@ -17,10 +17,10 @@ internal object cpy : ColorRegister() {
 }
 /*
 
-class CpyMethodColor(expression: UCallExpression) : ColorCallExpressionParser(expression) {
+class CpyMethodColor(initializer: UCallExpression) : ColorCallExpressionParser(initializer) {
     private val color: Color? by lazy {
 
-        val expr = expression.receiver ?: return@lazy null
+        val expr = initializer.receiver ?: return@lazy null
         Color().set(ColorExpressionResolver.resolveColor(expr) ?: return@lazy null)
     }
 

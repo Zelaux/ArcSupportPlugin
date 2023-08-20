@@ -1,3 +1,4 @@
+/*
 package com.zelaux.arcplugin.actions;
 
 import com.intellij.icons.*;
@@ -13,8 +14,10 @@ public class SwitchColorExprTabMode extends DumbAwareAction{
     public void actionPerformed(@NotNull AnActionEvent e){
         MySettingsState handler = MySettingsState.getInstance();
         if(handler == null) return;
-        boolean selected = !handler.viewColorExprSeqAsList;
-        handler.viewColorExprSeqAsList = selected;
+        */
+/*boolean selected = !handler.viewColorExprSeqAsList;
+        handler.viewColorExprSeqAsList = selected;*//*
+
         Toggleable.setSelected(e.getPresentation(), selected);
 
         if(!e.isFromActionToolbar()) return;
@@ -38,3 +41,4 @@ public class SwitchColorExprTabMode extends DumbAwareAction{
 
 
 }
+*/

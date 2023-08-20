@@ -8,7 +8,7 @@ plugins {
 val arcVersion = "v141.1"
 
 group = "com.github.Zelaux"
-version = "0.7.5"
+version = "0.8.0"
 
 repositories {
     mavenCentral()
@@ -34,7 +34,7 @@ intellij {
             "Kotlin",//////
 //            "org.intellij.scala:2022.2.19",//////
 //            "Groovy",//////
-
+            "org.jetbrains.java.decompiler",
             "properties",//////
             /*"DevKit",*/
             "org.intellij.intelliLang",//////
@@ -67,8 +67,8 @@ tasks {
 
     // Set the JVM compatibility versions
     withType<JavaCompile> {
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
+        sourceCompatibility = "16"
+        targetCompatibility = "16"
 
 
         val compilerArgs = options.compilerArgs
@@ -82,7 +82,7 @@ tasks {
     this.getByName("postInstrumentCode").actions.clear();
     patchPluginXml {
         sinceBuild.set("222.3345.118")
-        untilBuild.set("232")
+        untilBuild.set("232.9392.1")
     }
 
     signPlugin {

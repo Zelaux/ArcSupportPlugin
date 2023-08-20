@@ -25,9 +25,7 @@ public class MySettingsState implements PersistentStateComponent<MySettingsState
     @SettingField(title = "Special debug view for arc.graphics.Color? ", component = "checkBox()")
     public boolean enabledDebugViewForColor = true;
 
-    @SettingField(title = "View color expression sequence as list? ", component = "checkBox()")
-    @Separator
-    public boolean viewColorExprSeqAsList = false;
+
     @SettingField(title = "Do indexing for arc.Events in background? ", component = "checkBox()")
     @Separator
     public boolean backgroundEventIndexing = true;

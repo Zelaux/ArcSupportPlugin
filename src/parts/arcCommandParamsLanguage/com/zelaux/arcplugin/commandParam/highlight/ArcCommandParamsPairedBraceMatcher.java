@@ -11,8 +11,8 @@ import org.jetbrains.annotations.Nullable;
 public class ArcCommandParamsPairedBraceMatcher implements PairedBraceMatcher {
 
     private static final BracePair[] pairs = {
-            new BracePair(CPTypes.CP_LEFT_BRACKET, CPTypes.CP_RIGHT_BRACKET,true),
-            new BracePair(CPTypes.CP_LEFT_ARROW, CPTypes.CP_RIGHT_ARROW,true)
+            new BracePair(CPTypes.LEFT_BRACKET, CPTypes.RIGHT_BRACKET,true),
+            new BracePair(CPTypes.LEFT_ARROW, CPTypes.RIGHT_ARROW,true)
     };
 
     @Override

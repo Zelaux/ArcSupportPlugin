@@ -3,12 +3,14 @@ package com.zelaux.arcplugin.colorExpression;
 import arc.util.pooling.Pool;
 import arc.util.pooling.Pools;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiField;
 import com.zelaux.arcplugin.MetaData;
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpression;
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpressionSequence;
 import com.zelaux.arcplugin.expressions.resolve.Expression;
 import com.zelaux.arcplugin.expressions.resolve.methods.StaticSetColorExpression;
 import com.zelaux.arcplugin.utils.CustomUastTreeUtil;
+import com.zelaux.arcplugin.utils.resolve.StaticFieldResolver;
 import kotlin.collections.CollectionsKt;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +42,7 @@ public class ColorExpressionResolver {
         }
         UField resolved = CustomUastTreeUtil.resolveRecursiveField(expression);
         if (resolved == null) return null;
-        UExpression initializer = resolved.getUastInitializer();
+        UExpression initializer = UastUtils.findContaining(StaticFieldResolver.resolveStaticInitializer((PsiField) resolved.getSourcePsi()),UExpression.class);
         if (initializer == null) return null;
         return resolveColorSequence(initializer);
     }

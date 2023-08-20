@@ -8,9 +8,9 @@ import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.impl.compiled.ClsClassImpl;
-import com.intellij.psi.impl.compiled.ClsFieldImpl;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.zelaux.arcplugin.utils.resolve.SourceResolver;
+import com.zelaux.arcplugin.utils.resolve.StaticFieldResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.*;
@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class CustomUastTreeUtil {
 
@@ -42,25 +41,21 @@ public class CustomUastTreeUtil {
     @Nullable
     private static UField tryResolve(UElement element) {
         UElement resolve = resolveElement(element);
-        if (!(resolve instanceof UField)) {
+        if (!(resolve instanceof UField resolveField)) {
             if (resolve instanceof ULocalVariable) {
                 return tryResolve(((ULocalVariable) resolve).getUastInitializer());
             }
             return null;
         }
-        UField resolveField = (UField) resolve;
 
-        PsiElement sourcePsi = resolve.getSourcePsi();
-        if (!(sourcePsi instanceof ClsFieldImpl)) return resolveField;
-
-        ClsClassImpl parent = (ClsClassImpl) sourcePsi.getParent();
-        PsiClass sourceMirrorClass = parent.getSourceMirrorClass();
-        if (sourceMirrorClass == null) return null;
+        PsiExpression initializer = StaticFieldResolver.resolveStaticInitializer((PsiField) resolveField.getSourcePsi());
+        if(initializer!=null)return resolveField;
+        /*
         List<PsiField> collect = Arrays.stream(sourceMirrorClass.getAllFields())
                 .filter(it -> it.getName().equals(resolveField.getName()))
-                .collect(Collectors.toList());
+                .toList();
         if (collect.size() == 1 && collect.get(0).hasInitializer())
-            return UastUtils.findContaining(collect.get(0), UField.class);
+            return UastUtils.findContaining(collect.get(0), UField.class);*/
         return null;
     }
 

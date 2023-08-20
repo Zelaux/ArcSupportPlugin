@@ -347,7 +347,7 @@ public class _ArcCommandParamsLexer implements FlexLexer {
 
 
   /**
-   * Returns the text matched by the current regular expression.
+   * Returns the text matched by the current regular initializer.
    */
   public final CharSequence yytext() {
     return zzBuffer.subSequence(zzStartRead, zzMarkedPos);
@@ -422,7 +422,7 @@ public class _ArcCommandParamsLexer implements FlexLexer {
 
 
   /**
-   * Resumes scanning until the next regular expression is matched,
+   * Resumes scanning until the next regular initializer is matched,
    * the end of input is encountered or an I/O-Error occurs.
    *
    * @return      the next token
@@ -513,7 +513,7 @@ public class _ArcCommandParamsLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { return CPTypes.CP_IDENTIFIER;
+            { return CPTypes.IDENTIFIER;
             }
           // fall through
           case 9: break;
@@ -523,32 +523,32 @@ public class _ArcCommandParamsLexer implements FlexLexer {
           // fall through
           case 10: break;
           case 3:
-            { return CPTypes.CP_SPACE;
+            { return CPTypes.SPACE;
             }
           // fall through
           case 11: break;
           case 4:
-            { return CPTypes.CP_LEFT_ARROW;
+            { return CPTypes.LEFT_ARROW;
             }
           // fall through
           case 12: break;
           case 5:
-            { return CPTypes.CP_RIGHT_ARROW;
+            { return CPTypes.RIGHT_ARROW;
             }
           // fall through
           case 13: break;
           case 6:
-            { return CPTypes.CP_LEFT_BRACKET;
+            { return CPTypes.LEFT_BRACKET;
             }
           // fall through
           case 14: break;
           case 7:
-            { return CPTypes.CP_RIGHT_BRACKET;
+            { return CPTypes.RIGHT_BRACKET;
             }
           // fall through
           case 15: break;
           case 8:
-            { return CPTypes.CP_DOTS;
+            { return CPTypes.DOTS;
             }
           // fall through
           case 16: break;

@@ -22,12 +22,12 @@ import static com.zelaux.arcplugin.utils.PsiExpressionUtilsKt.*;
 
 public class ArcDrawColorExpProvider implements ExpParserSeqProvider{
 
-    private static ColorExpParserSequence getColorExpressionSequence(@Nullable UCallExpression expression, @NotNull PsiCallExpression element){
-        if(expression == null) return null;
+    private static ColorExpParserSequence getColorExpressionSequence(@Nullable UCallExpression initializer, @NotNull PsiCallExpression element){
+        if(initializer == null) return null;
         String[] availableMethods = {MetaData.Draw.color, MetaData.Draw.colorl, MetaData.Draw.mixcol};
         for(String availableMethod : availableMethods){
-            if(UExpressionUtils.isStaticMethod(expression, MetaData.Draw.PATH, availableMethod)){
-//                return getColorInternal(expression, element);
+            if(UExpressionUtils.isStaticMethod(initializer, MetaData.Draw.PATH, availableMethod)){
+//                return getColorInternal(initializer, element);
             }
         }
         return null;

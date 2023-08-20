@@ -35,7 +35,7 @@ public interface LanguageInfo {
 
     MyElementFactory getNewFactory(Project project);
 
-    /*@NotNull PsiElement parseExpression(@NotNull PsiElement context,@NotNull String expression);
+    /*@NotNull PsiElement parseExpression(@NotNull PsiElement context,@NotNull String initializer);
 
     default PsiElement createStringLiteral(@NotNull PsiElement context,@NotNull String value){
         return parseExpression(context,'"'+value+'"');

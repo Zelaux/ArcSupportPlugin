@@ -56,12 +56,12 @@ public class ArcDrawColorProvider implements ElementColorViewerProvider{
     }
 
 
-    private static ColorResult getJavaColorFromExpression(@Nullable UCallExpression expression){
-        if(expression == null) return NullColorResult.INSTANCE;
+    private static ColorResult getJavaColorFromExpression(@Nullable UCallExpression initializer){
+        if(initializer == null) return NullColorResult.INSTANCE;
         String[] availableMethods = {MetaData.Draw.color, MetaData.Draw.colorl,MetaData.Draw.mixcol};
         for(String availableMethod : availableMethods){
-            if(UExpressionUtils.isStaticMethod(expression, MetaData.Draw.PATH, availableMethod)){
-                return getColorInternal(expression);
+            if(UExpressionUtils.isStaticMethod(initializer, MetaData.Draw.PATH, availableMethod)){
+                return getColorInternal(initializer);
             }
         }
         return NullColorResult.INSTANCE;
@@ -69,8 +69,8 @@ public class ArcDrawColorProvider implements ElementColorViewerProvider{
 
 
     @Override
-    public @Nullable Color getColor(UCallExpression expression){
-        return getColorInternal(expression).getColor();
+    public @Nullable Color getColor(UCallExpression initializer){
+        return getColorInternal(initializer).getColor();
     }
 
     private static ColorResult getColorInternal(UCallExpression newExpression){

@@ -9,8 +9,6 @@ import com.intellij.ui.colorpicker.LightCalloutPopup;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.scale.JBUIScale;
-import com.intellij.ui.tabs.TabInfo;
-import com.intellij.ui.tabs.TabsListener;
 import com.intellij.util.ui.ColorIcon;
 import com.intellij.util.ui.ColorsIcon;
 import com.intellij.util.ui.FormBuilder;
@@ -21,7 +19,6 @@ import com.zelaux.arcplugin.expressions.resolve.ArcColorExpression;
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpressionSequence;
 import com.zelaux.arcplugin.expressions.resolve.ExpressionSequence;
 import com.zelaux.arcplugin.ui.JPanelBuilder;
-import com.zelaux.arcplugin.ui.colorparser.ColorExpressionParserTabs;
 import com.zelaux.arcplugin.ui.components.ColorComponent;
 import com.zelaux.arcplugin.ui.picker.popup.SimplePopup;
 
@@ -42,10 +39,7 @@ public class ArcColorExpressionSequenceRenderer implements ExpressionSequenceRen
         if (list.size() == 1) {
             return list.get(0).createRenderer().getTabComponent(project, ref, param);
         }
-        if (settings.isListView()) {
-            return listBuilder(project, ref, param);
-        }
-        return tabsBuilder(project, ref, param);
+        return listBuilder(project, ref, param);
     }
 
     private static JPanelBuilder listBuilder(Project project,
@@ -81,44 +75,6 @@ public class ArcColorExpressionSequenceRenderer implements ExpressionSequenceRen
             addComponent(actionToolbar.getComponent());
             addComponent(pane);
             addColorPreview(this, param);
-        }};
-    }
-
-    private static JPanelBuilder tabsBuilder(Project project,
-                                             Ref<LightCalloutPopup> popupRef,
-                                             Ref<ArcColorExpressionRenderSettings> param) {
-        return new JPanelBuilder() {{
-            List<ArcColorExpression> list = param.get().sequence().list();
-            ColorExpressionParserTabs tabs = new ColorExpressionParserTabs(project, this::hashCode);
-            ArcColorExpressionRenderer[] renderers = new ArcColorExpressionRenderer[list.size()];
-            for (int i = 0; i < list.size(); i++) {
-                ArcColorExpression expr = list.get(i);
-                JPanel panel = (renderers[i] = expr.createRenderer())
-                        .getTabComponent(project, popupRef, param)
-                        .buildJPanel();
-                tabs.addTab(new TabInfo(panel)
-                                .setObject(i)
-                        .setText(expr.calculateTabTitle())
-                        .setPreferredFocusableComponent(panel)
-                );
-            }
-            tabs.addListener(new TabsListener() {
-                @Override
-                public void beforeSelectionChanged(TabInfo oldSelection, TabInfo newSelection) {
-                    if (newSelection == null) return;
-                    int id = (int) newSelection.getObject();
-                    JPanel panel = renderers[id]
-                            .getTabComponent(project, popupRef, param)
-                            .buildJPanel();
-                    newSelection
-                            .setComponent(panel)
-                            .setPreferredFocusableComponent(panel);
-                }
-            });
-            tabs.setMaximumSize(maximumSizeForRootComponent());
-            addComponent(tabs);
-            addColorPreview(this, param);
-
         }};
     }
 
