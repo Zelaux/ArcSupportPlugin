@@ -16,7 +16,7 @@
 
     <xi:include href="/META-INF/description.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
-<!--    <depends optional="true" config-file="/META-INF/jvmlang/kotlin.xml">org.jetbrains.kotlin</depends>-->
+    <depends optional="true" config-file="/META-INF/jvmlang/kotlin.xml">org.jetbrains.kotlin</depends>
     <depends optional="true" config-file="/META-INF/dependencies/javaDecompiler.xml">org.jetbrains.java.decompiler</depends>
     <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.modules.lang</depends>
