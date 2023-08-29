@@ -30,7 +30,9 @@ public class ValueOfParserRenderer extends ArcColorExpressionRenderer {
         if(param.get().isWritable()){
             return DefaultColorPickerPopup.instance(color,true).builder(project, (ColorListener) (color1, source) -> {
                 writeColorAction(project,()->{
-                    String newValue = ColorUtils.toArc(color1).toString();
+                    arc.graphics.Color tmpColor = ColorUtils.obtainColor();
+                    String newValue = ColorUtils.toArc(color1,tmpColor).toString();
+                    ColorUtils.freeColors(tmpColor);
                     self.replaceParamExpression(0,newValue, UastExpressionUtils::replaceString);
                     param.get().fireUpdate(self);
                 });

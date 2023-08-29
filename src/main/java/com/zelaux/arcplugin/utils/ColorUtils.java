@@ -3,6 +3,7 @@ package com.zelaux.arcplugin.utils;
 import arc.math.Mathf;
 import arc.util.pooling.Pool;
 import arc.util.pooling.Pools;
+import arclibrary.utils.pools.*;
 import com.zelaux.arcplugin.awt.GradientColor;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,7 +12,7 @@ import java.util.function.Function;
 
 @SuppressWarnings("UseJBColor")
 public class ColorUtils {
-    public static final Pool<arc.graphics.Color> colorPool = Pools.get(arc.graphics.Color.class, arc.graphics.Color::new);
+    public static final Pool<arc.graphics.Color> colorPool = ThreadSafePools.get(arc.graphics.Color.class, arc.graphics.Color::new);
     public static Color toAwt(arc.graphics.Color color) {
         return new Color(Mathf.clamp(color.r), Mathf.clamp(color.g), Mathf.clamp(color.b), Mathf.clamp(color.a));
     }
@@ -82,5 +83,12 @@ public class ColorUtils {
         for (arc.graphics.Color color : colors) {
             colorPool.free(color);
         }
+    }
+    public static void freeColors(arc.graphics.Color color){
+        colorPool.free(color);
+    }
+    public static void freeColors(arc.graphics.Color color,arc.graphics.Color color2){
+        colorPool.free(color);
+        colorPool.free(color2);
     }
 }

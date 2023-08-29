@@ -9,7 +9,7 @@ import com.zelaux.arcplugin.expressions.resolve.ArcColorExpression;
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpressionSequence;
 import com.zelaux.arcplugin.expressions.resolve.Expression;
 import com.zelaux.arcplugin.expressions.resolve.methods.StaticSetColorExpression;
-import com.zelaux.arcplugin.utils.CustomUastTreeUtil;
+import com.zelaux.arcplugin.utils.*;
 import com.zelaux.arcplugin.utils.resolve.StaticFieldResolver;
 import kotlin.collections.CollectionsKt;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +20,7 @@ import java.awt.*;
 import java.util.Objects;
 
 public class ColorExpressionResolver {
-    private static final Pool<arc.graphics.Color> colorPool = Pools.get(arc.graphics.Color.class, arc.graphics.Color::new);
+    private static final Pool<arc.graphics.Color> colorPool = ColorUtils.colorPool;
 
     @Nullable
     public static Color resolveColor(@Nullable UExpression expression) {

@@ -8,6 +8,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.zelaux.arcplugin.expressions.resolve.ArcColorExpressionSequence;
 import com.zelaux.arcplugin.expressions.resolve.methods.StaticSetColorExpression;
 import com.zelaux.arcplugin.marker.ExpressionSequenceProvider;
+import com.zelaux.arcplugin.utils.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.uast.UCallExpression;
 import org.jetbrains.uast.UExpression;
@@ -16,7 +17,7 @@ import org.jetbrains.uast.UastUtils;
 
 public class ColorFieldAssignLineMarkerProvider implements ExpressionSequenceProvider {
 
-    private static final Pool<Color> colorPool = Pools.get(arc.graphics.Color.class, arc.graphics.Color::new);
+    private static final Pool<Color> colorPool = ColorUtils.colorPool;
 
     @Override
     public ArcColorExpressionSequence expressionParserSequenceFrom(@NotNull PsiElement element) {

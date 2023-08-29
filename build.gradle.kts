@@ -6,9 +6,10 @@ plugins {
     id("org.jetbrains.intellij") version "1.8.0"
 }
 val arcVersion = "v141.1"
+val arcLibVersion = "6319db1a3d"
 
 group = "com.github.Zelaux"
-version = "0.8.0"
+version = "0.8.1"
 
 repositories {
     mavenCentral()
@@ -17,6 +18,7 @@ repositories {
 dependencies {
     implementation("org.openjdk.nashorn:nashorn-core:15.4")
     implementation("com.github.Anuken.Arc:arc-core:$arcVersion")
+    implementation("com.github.Zelaux.ArcLibrary:pools:$arcLibVersion")
     testImplementation("junit:junit:4.13.2")
 }
 
