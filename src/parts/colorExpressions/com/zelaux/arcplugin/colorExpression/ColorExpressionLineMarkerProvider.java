@@ -37,8 +37,8 @@ public class ColorExpressionLineMarkerProvider implements  ExpressionSequencePro
 
     @Override
     public ArcColorExpressionSequence expressionParserSequenceFrom(@NotNull PsiElement element) {
-        if (!(element instanceof PsiIdentifier)) return null;
-        UElement thisUast = UastUtils.findContaining(element, UElement.class);
+        UElement thisUast = UastUtils.findContaining(element, UIdentifier.class);
+        if (thisUast==null) return null;
         UCallExpression method = UastUtils.findContaining(element, UCallExpression.class);
         if (method == null) return null;
         UIdentifier identifier = method.getMethodIdentifier();

@@ -9,7 +9,7 @@ val arcVersion = "v141.1"
 val arcLibVersion = "6319db1a3d"
 
 group = "com.github.Zelaux"
-version = "0.8.1"
+version = "0.8.2"
 
 repositories {
     mavenCentral()

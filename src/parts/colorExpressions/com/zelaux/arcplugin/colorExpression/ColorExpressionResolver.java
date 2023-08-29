@@ -117,7 +117,7 @@ public class ColorExpressionResolver {
             return null;
         }
         String name = method.getMethodName();
-        if (name == null) name = "";
+        if (name == null || "<init>".equals(name)/*stupid kotlin*/) name = "";
         return ColorExpressionParserMap.INSTANCE.get(name, method);
     }
 }
