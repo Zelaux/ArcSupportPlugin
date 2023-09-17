@@ -28,12 +28,14 @@ public class CustomUastTreeUtil{
     }
 
     @Nullable
-    public static UField resolveRecursiveField(UElement element){
+    @Contract("null -> null")
+    public static UField resolveRecursiveField(@Nullable UElement element){
         return tryResolve(element);
     }
 
     @Nullable
-    private static UField tryResolve(UElement element){
+    @Contract("null -> null")
+    private static UField tryResolve(@Nullable UElement element){
         UElement resolve = resolveElement(element);
         if(!(resolve instanceof UField resolveField)){
             if(resolve instanceof ULocalVariable){
@@ -54,14 +56,18 @@ public class CustomUastTreeUtil{
     }
 
     @Nullable
-    public static UElement resolveElement(UElement element){
+    @Contract("null -> null")
+    public static UElement resolveElement(@Nullable UElement element){
+        if(element==null)return null;
         if(!(element instanceof UResolvable)) return fallbackResolveElement(element);
         PsiElement resolved = ((UResolvable)element).resolve();
         return resolved == null ? fallbackResolveElement(element) : UastUtils.findContaining(resolved,UElement.class);
     }
 
     @Nullable
-    public static UElement fallbackResolveElement(UElement element){
+    @Contract("null -> null")
+    public static UElement fallbackResolveElement(@Nullable UElement element){
+        if(element == null)return null;
         PsiElement sourcePsi = element.getSourcePsi();
 
         if(sourcePsi == null) return null;
