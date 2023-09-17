@@ -7,35 +7,41 @@ import com.zelaux.arcplugin.events.AutoUpdatableEventCache;
 import com.zelaux.arcplugin.events.indexing.EventIndexingManager;
 import org.jetbrains.annotations.NotNull;
 
-public class UpdateActivity implements Runnable {
-    @SuppressWarnings("unchecked")
+public class UpdateActivity implements Runnable{
     public final Project project;
     final AutoUpdatableEventCache<?>[] updatableEventCaches;
+    @NotNull
+    public final Runnable cancelCallback;
     boolean wasDump = false;
 
-    public UpdateActivity(@NotNull Project project) {
+    public UpdateActivity(@NotNull Project project, @NotNull Runnable cancelCallback){
         this.project = project;
+        this.cancelCallback = cancelCallback;
         updatableEventCaches = new AutoUpdatableEventCache<?>[]{
-                EventIndexingManager.projectFirePoints,
-                EventIndexingManager.projectEventSubscription,
-                EventIndexingManager.librariesFirePoints,
-                EventIndexingManager.librariesEventSubscription,
+            EventIndexingManager.projectFirePoints,
+            EventIndexingManager.projectEventSubscription,
+            EventIndexingManager.librariesFirePoints,
+            EventIndexingManager.librariesEventSubscription,
         };
     }
 
     @Override
-    public void run() {
+    public void run(){
+        if(project.isDisposed()){
+            cancelCallback.run();
+            return;
+        }
         boolean dumbMode = ActionUtil.isDumbMode(project);
-        if (dumbMode && !wasDump) {
+        if(dumbMode && !wasDump){
             DumbService.getInstance(project).runWhenSmart(() -> {
-                for (AutoUpdatableEventCache<?> cache : updatableEventCaches) {
-                    if (cache.isLibraries) cache.checkCalculation();
+                for(AutoUpdatableEventCache<?> cache : updatableEventCaches){
+                    if(cache.isLibraries) cache.checkCalculation();
                 }
             });
         }
         wasDump = dumbMode;
-        for (AutoUpdatableEventCache<?> eventCache : updatableEventCaches) {
-            if (!eventCache.isLibraries) eventCache.checkCalculation();
+        for(AutoUpdatableEventCache<?> eventCache : updatableEventCaches){
+            if(!eventCache.isLibraries) eventCache.checkCalculation();
         }
     }
 
