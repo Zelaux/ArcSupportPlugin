@@ -44,7 +44,8 @@ public class CustomUastTreeUtil{
             return null;
         }
 
-        PsiExpression initializer = StaticFieldResolver.resolveStaticInitializer((PsiField)resolveField.getSourcePsi());
+        if(!(resolveField.getSourcePsi() instanceof PsiField sourcePsiField)) return null;
+        PsiExpression initializer = StaticFieldResolver.resolveStaticInitializer(sourcePsiField);
         if(initializer != null) return resolveField;
         /*
         List<PsiField> collect = Arrays.stream(sourceMirrorClass.getAllFields())
@@ -58,16 +59,16 @@ public class CustomUastTreeUtil{
     @Nullable
     @Contract("null -> null")
     public static UElement resolveElement(@Nullable UElement element){
-        if(element==null)return null;
+        if(element == null) return null;
         if(!(element instanceof UResolvable)) return fallbackResolveElement(element);
         PsiElement resolved = ((UResolvable)element).resolve();
-        return resolved == null ? fallbackResolveElement(element) : UastUtils.findContaining(resolved,UElement.class);
+        return resolved == null ? fallbackResolveElement(element) : UastUtils.findContaining(resolved, UElement.class);
     }
 
     @Nullable
     @Contract("null -> null")
     public static UElement fallbackResolveElement(@Nullable UElement element){
-        if(element == null)return null;
+        if(element == null) return null;
         PsiElement sourcePsi = element.getSourcePsi();
 
         if(sourcePsi == null) return null;
