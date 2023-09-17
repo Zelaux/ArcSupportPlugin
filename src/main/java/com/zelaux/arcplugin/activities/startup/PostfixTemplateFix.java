@@ -68,12 +68,12 @@ public class PostfixTemplateFix implements StartupActivity{
         return null;
     }
 
-    public static void editConditions(@NotNull Set<JavaPostfixTemplateExpressionCondition> condistion){
+    public static void editConditions(@NotNull Set<JavaPostfixTemplateExpressionCondition> condition){
         for(Class<?> clazz : nonIterableQueue){
-            condistion.add(new JavaPostfixTemplateExpressionFqnCondition(clazz.getCanonicalName()));
+            condition.add(new JavaPostfixTemplateExpressionFqnCondition(clazz.getCanonicalName()));
         }
         for(Class<?> clazz : sequences){
-            condistion.add(new JavaPostfixTemplateExpressionFqnCondition(clazz.getCanonicalName()));
+            condition.add(new JavaPostfixTemplateExpressionFqnCondition(clazz.getCanonicalName()));
         }
     }
 

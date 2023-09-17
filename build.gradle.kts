@@ -15,12 +15,12 @@ repositories {
     mavenCentral()
     maven { url = uri("https://jitpack.io") }
     maven { url = uri("https://raw.githubusercontent.com/Zelaux/Repo/master/repository") }
-    maven { url = url("https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
+    maven { url = uri("https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
 }
 dependencies {
     implementation("org.openjdk.nashorn:nashorn-core:15.4")
     implementation("com.github.Anuken.Arc:arc-core:$arcVersion")
-    implementation("com.github.Zelaux.ArcLibrary:pools:$arcLibVersion")
+    implementation("com.github.Zelaux.ArcLibrary:utils-pools:$arcLibVersion")
     testImplementation("junit:junit:4.13.2")
 }
 
@@ -28,6 +28,7 @@ dependencies {
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
     version.set("2022.2.3")
+//    version.set("2023.2")
 //    type.set("IC") // Target IDE Platform
     type.set("IC") // Target IDE Platform
 
