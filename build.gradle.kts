@@ -5,8 +5,8 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.6.20"
     id("org.jetbrains.intellij") version "1.8.0"
 }
-val arcVersion = "v141.1"
-val arcLibVersion = "6319db1a3d"
+val arcVersion = "v146"
+val arcLibVersion = "v1.0.3.1"
 
 group = "com.github.Zelaux"
 version = "0.8.2"
@@ -14,6 +14,8 @@ version = "0.8.2"
 repositories {
     mavenCentral()
     maven { url = uri("https://jitpack.io") }
+    maven { url = uri("https://raw.githubusercontent.com/Zelaux/Repo/master/repository") }
+    maven { url = url("https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
 }
 dependencies {
     implementation("org.openjdk.nashorn:nashorn-core:15.4")
@@ -41,7 +43,7 @@ intellij {
             /*"DevKit",*/
             "org.intellij.intelliLang",//////
 
-            ))
+    ))
 }
 sourceSets {
     main {
