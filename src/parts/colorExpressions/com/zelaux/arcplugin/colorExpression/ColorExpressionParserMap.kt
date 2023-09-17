@@ -68,7 +68,8 @@ object ColorExpressionParserMap {
         val nameMap = run {
             var clazz = resolvedMethod.containingClass
             while (clazz != null) {
-                val value = classMap[ClassQualifier(clazz.qualifiedName!!)]
+                val qualifier = clazz.qualifiedName ?:return@get null;
+                val value = classMap[ClassQualifier(qualifier)]
                 if (value != null) return@run value
                 clazz = clazz.superClass
             }
